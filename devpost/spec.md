@@ -98,6 +98,11 @@ PRD ref: `prd.md > The Core Journey`.
 - Secrets are entered in Render's dashboard, never in the repo.
 - Must stay up through Dec 15, 2026.
 
+**Shared links:**
+- Live demo: https://mendly-hed3.onrender.com (`/demo/linda`, `/demo/marco`, `/demo/tenant`)
+- Public repository: https://github.com/DollyL33/mendly (MIT)
+- Demo video: _added when uploaded_
+
 **Submission:** the hosted URL, plus the `/demo/linda`, `/demo/marco` and `/demo/tenant` paths, go in the README and Devpost. The demo video is recorded from the hosted app, using the live camera for at least one photo so the video matches real use.
 
 ## Look and Feel
