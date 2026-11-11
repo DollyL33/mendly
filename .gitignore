@@ -1,0 +1,19 @@
+# Personal learning context
+/devpost/learner-profile.md
+
+# Local credentials
+.env
+.env.*
+!.env.example
+node_modules
+
+# Dependencies and build output
+/node_modules
+/.next
+next-env.d.ts
+*.tsbuildinfo
+
+# Local data (database and uploaded photos)
+/data
+
+.DS_Store

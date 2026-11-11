@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mendly Blueprint</title>
+<style>
+:root{--paper:#FAF7F2;--card:#fff;--ink:#1F2A2E;--muted:#5d686b;--brand:#1E5B4F;--ok:#2F8F5B;--amber:#D98E04;--brick:#B3412E;--line:#E4DED4;--pp:#2a4fa0;--ai:#6b4fa0;--brand-bg:#e3eeeb;--amber-bg:#fbf0d9;--ok-bg:#e5f2ea}
+@media (prefers-color-scheme:dark){:root{--paper:#171c1d;--card:#20282a;--ink:#eef0ee;--muted:#a8b2b2;--brand:#7cc3b2;--ok:#7fd3a0;--amber:#f0b54a;--brick:#ee8f7e;--line:#354245;--pp:#9db6f2;--ai:#c4b0f0;--brand-bg:#1c3631;--amber-bg:#3e3119;--ok-bg:#1d3a2a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+main{max-width:920px;margin:0 auto;padding:40px 16px 72px}
+h1{font-size:2.3rem;margin:0}
+h2{font-size:1.3rem;margin:44px 0 12px;padding-top:10px;border-top:1px solid var(--line)}
+h3{margin:0 0 6px;font-size:1.05rem}
+.lead{color:var(--muted);font-size:1.12rem;margin:6px 0 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.note{background:var(--brand-bg);border-radius:10px;padding:12px 16px;margin:14px 0}
+.warn{background:var(--amber-bg);border-left:5px solid var(--amber);border-radius:8px;padding:10px 14px;margin:10px 0}
+code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em}
+svg{width:100%;height:auto;display:block}
+svg text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;fill:var(--ink)}
+.box{fill:var(--card);stroke:var(--line);stroke-width:2}
+.box.app{stroke:var(--brand)}.box.ai{stroke:var(--ai)}.box.pp{stroke:var(--pp)}.box.rules{stroke:var(--amber);stroke-width:3}
+.lbl{font-size:15px;font-weight:700}.sub{font-size:12px;fill:var(--muted)}
+.arr{stroke:var(--muted);stroke-width:2;fill:none;marker-end:url(#a)}
+.arr.money{stroke:var(--pp);stroke-width:2.5}
+.who{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.chip{font-size:.85rem;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
+.chip.on{background:var(--brand);border-color:var(--brand);color:var(--paper)}
+.track{display:flex;gap:4px;margin:12px 0}
+.track button{flex:1;height:10px;border:0;border-radius:5px;background:var(--line);cursor:pointer;padding:0}
+.track button.done{background:var(--brand)}
+.stepnum{font-size:.85rem;color:var(--muted)}
+.files{font-size:.9rem;color:var(--muted);margin-top:8px}
+.stepnav{display:flex;justify-content:space-between;margin-top:12px}
+.stepnav button{font:inherit;padding:8px 16px;border-radius:8px;border:1px solid var(--brand);background:var(--card);color:var(--brand);cursor:pointer}
+.stepnav button.primary{background:var(--brand);color:var(--paper)}
+.stepnav button:disabled{opacity:.35;cursor:default}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+summary small{font-weight:400;color:var(--muted)}
+details p,details ul{margin:8px 0 2px}
+li{margin:4px 0}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.scroll{overflow-x:auto}
+.rule{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.r{border-radius:8px;padding:10px 12px;border-left:5px solid}
+.r.ok{background:var(--ok-bg);border-color:var(--ok)}.r.am{background:var(--amber-bg);border-color:var(--amber)}.r.fx{background:var(--card);border-color:var(--brick);border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+</style>
+</head>
+<body>
+<main>
+<h1>Mendly blueprint</h1>
+<p class="lead">How the product in your PRD gets built: the pieces, how data moves, and where everything lives.</p>
+
+<h2>The pieces</h2>
+<div class="card">
+<svg viewBox="0 0 860 420" role="img" aria-labelledby="dt">
+<title id="dt">Architecture: three people use the screens, which talk to the Mendly server. The server uses a database file, Claude, the payment rules, and PayPal sandbox.</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" style="fill:var(--muted)"/></marker></defs>
+<rect class="box" x="20" y="30" width="200" height="110" rx="12"/>
+<text class="lbl" x="40" y="62">People</text>
+<text class="sub" x="40" y="86">Tenant · Linda · Marco</text>
+<text class="sub" x="40" y="106">Judges, via the link</text>
+<rect class="box app" x="20" y="200" width="200" height="110" rx="12"/>
+<text class="lbl" x="40" y="232">Screens</text>
+<text class="sub" x="40" y="256">Entry, tickets, camera,</text>
+<text class="sub" x="40" y="276">PayPal button, panels</text>
+<rect class="box app" x="300" y="150" width="240" height="210" rx="12"/>
+<text class="lbl" x="320" y="182">Mendly server</text>
+<text class="sub" x="320" y="206">Next.js, one project</text>
+<text class="sub" x="320" y="230">Saves reports and photos</text>
+<text class="sub" x="320" y="250">Fingerprints photos</text>
+<text class="sub" x="320" y="270">Asks Claude, applies rules</text>
+<text class="sub" x="320" y="290">Asks PayPal to move money</text>
+<rect class="box rules" x="320" y="306" width="200" height="40" rx="8"/>
+<text class="lbl" x="334" y="331" style="font-size:13px">Payment rules (no AI)</text>
+<rect class="box" x="620" y="20" width="220" height="90" rx="12"/>
+<text class="lbl" x="640" y="52">Database file</text>
+<text class="sub" x="640" y="76">Jobs, photos, results,</text>
+<text class="sub" x="640" y="94">history (SQLite on a disk)</text>
+<rect class="box ai" x="620" y="150" width="220" height="90" rx="12"/>
+<text class="lbl" x="640" y="182">Claude Opus 5.5</text>
+<text class="sub" x="640" y="206">Plans the job</text>
+<text class="sub" x="640" y="224">Inspects the photos</text>
+<rect class="box pp" x="620" y="280" width="220" height="120" rx="12"/>
+<text class="lbl" x="640" y="312">PayPal sandbox</text>
+<text class="sub" x="640" y="336">Hold Linda's money</text>
+<text class="sub" x="640" y="356">Take it, pay Marco</text>
+<text class="sub" x="640" y="376">Or release the hold</text>
+<path class="arr" d="M120 140 V196"/>
+<path class="arr" d="M220 255 H296"/>
+<path class="arr" d="M540 190 Q590 120 616 75"/>
+<path class="arr" d="M540 200 H616"/>
+<path class="arr money" d="M540 320 H616"/>
+</svg>
+<p class="files"><b>The key rule:</b> Claude only gives verdicts. The <b>payment rules</b>, written in code, are the only thing that can start an automatic payment.</p>
+</div>
+
+<h2>One repair, through the system</h2>
+<div class="card">
+<div class="who" id="who"></div>
+<div class="track" id="track"></div>
+<div class="stepnum" id="num"></div>
+<h3 id="title"></h3>
+<div id="body"></div>
+<div class="files" id="files"></div>
+<div class="stepnav"><button id="prev">← Back</button><button id="next" class="primary">Next →</button></div>
+</div>
+<noscript><p>The step-by-step walkthrough needs JavaScript. It is also in spec.md under "The Core Journey Through the System".</p></noscript>
+
+<h2>How the payment rules decide</h2>
+<div class="rule">
+<div class="r fx"><b>Needs fix</b><br>An item failed on the first try. Marco retakes only that item.</div>
+<div class="r am"><b>Needs Linda</b><br>Failed again, a reused photo, Claude unavailable, or over her limit.</div>
+<div class="r ok"><b>Pay</b><br>Everything passed and the job is at or under the limit (default <span class="mono">$100</span>).</div>
+</div>
+
+<h2>The parts, and what they serve</h2>
+<details><summary>Demo sessions and seeding <small>· Demo experience</small></summary><p>A private demo ID per visitor, kept in a cookie. Seeds: the <span class="mono">$180</span> wall patch (live from approval onward), plus two labeled sample jobs. Reset wipes and reseeds. <code>lib/demo.ts</code></p></details>
+<details><summary>Screens <small>· Screens and Layout</small></summary><p>Entry page, <code>/demo/linda|marco|tenant</code> shortcuts, tenant view, Linda's list and ticket, Marco's list and job screen. Top bar and next-step hint on every screen. <code>app/</code>, <code>components/</code></p></details>
+<details><summary>Repair reports and job planner <small>· Repair reports, Agent job planning</small></summary><p>Text plus a photo go to Claude, which returns a summary, estimate, 2–4 checklist items, and any uncertainty notes. <code>app/api/reports</code>, <code>lib/ai.ts</code></p></details>
+<details><summary>PayPal client <small>· Approval and funding, Automatic payment</small></summary><ul>
+<li><i>Through PayPal's Server SDK where it has the call; direct calls otherwise.</i></li>
+<li>Create order (authorize) → <code>POST /v2/checkout/orders</code></li>
+<li>Authorize → <code>POST /v2/checkout/orders/{id}/authorize</code></li>
+<li>Take the money → <code>POST /v2/payments/authorizations/{id}/capture</code></li>
+<li>Release the hold → <code>POST /v2/payments/authorizations/{id}/void</code></li>
+<li>Pay Marco → <code>POST /v1/payments/payouts</code></li>
+<li>Check payment → <code>GET /v1/payments/payouts/{batchId}</code></li></ul><p><code>lib/paypal.ts</code></p></details>
+<details><summary>Photo checks and inspector <small>· Proof submission, AI inspection</small></summary><p>Photos are shrunk and fingerprinted, and near-matches with earlier photos are flagged as reused. Claude then returns a verdict and reason per item. Text inside photos is treated as evidence, never instructions. <code>lib/photos.ts</code>, <code>lib/ai.ts</code></p></details>
+<details><summary>Payment rules <small>· Automatic payment, Fix and resend</small></summary><p>Pure code. The only place an automatic payment can start. <code>lib/rules.ts</code></p></details>
+<details><summary>Linda's decisions, limit, and payment status <small>· Linda's decisions</small></summary><p>Pay Marco or Cancel (void). Limit changes apply from then on. Marco's panel asks for payment status every few seconds while it's on its way.</p></details>
+<details><summary>Job record and spending guard <small>· Job record</small></summary><p>Every status change writes a timed event, and the ticket timeline is built from these. A cap of 20 Claude calls per visitor, plus a spend limit in the Anthropic Console.</p></details>
+
+<h2>Where data lives</h2>
+<div class="scroll"><table>
+<tr><th>Data</th><th>Where</th><th>Changes when</th><th>Coming back</th></tr>
+<tr><td>Jobs and statuses</td><td>Database file on a Render disk</td><td>Each journey step</td><td>Same browser: still there until Reset, even after restarts</td></tr>
+<tr><td>Photos</td><td><code>uploads/</code> on the disk + fingerprint in database</td><td>Each upload</td><td>Same</td></tr>
+<tr><td>Job history</td><td><code>events</code> table</td><td>Every status change</td><td>Same</td></tr>
+<tr><td>Auto-pay limit</td><td><code>demos</code> table</td><td>Linda changes it</td><td>Same</td></tr>
+<tr><td>Secrets</td><td><code>.env.local</code> and Render dashboard</td><td>Setup only</td><td>Never in the repo</td></tr>
+</table></div>
+
+<h2>Where it runs</h2>
+<div class="card"><ul>
+<li><b>While building:</b> <code>npm run dev</code>, then open <code>localhost:3000</code></li>
+<li><b>For judges:</b> Render Web Service, Starter plan (about <span class="mono">$7</span>/month, paid from the <span class="mono">$50</span> hackathon credit), plus a 1 GB disk (about <span class="mono">$0.25</span>/month) so data survives restarts, connected to GitHub, up through Dec 15</li>
+<li><b>Video:</b> recorded on the hosted app, with at least one live camera photo</li></ul></div>
+
+<h2>If something breaks</h2>
+<details><summary>Payouts don't work in the sandbox</summary><p>Tested first, on day one. Try enabling Payouts, then the fallback of setting Marco as the payee. If neither works, say plainly what is simulated.</p></details>
+<details><summary>Claude fails or is slow</summary><p>"Couldn't check this right now." Never auto-pays; the job goes to Linda.</p></details>
+<details><summary>The demo PayPal login stops working</summary><p>Swap to the backup Linda account in Render's settings. Check the login daily during judging.</p></details>
+<details><summary>The camera is blocked</summary><p>Sample photo sets and a normal file picker.</p></details>
+
+<h2>Decisions to confirm</h2>
+<div class="warn"><b>Costs:</b> Render hosting covered by the <span class="mono">$50</span> hackathon credit. A <span class="mono">$10–20</span> Claude credit is the only spend. KERNEL credits don't apply.</div>
+<div class="note"><b>Agreed:</b> Agent Toolkit off the money path · database on a Render disk · APIMatic Context Plugin with PayPal's official Server SDK · KERNEL skipped · Render Workflows deferred.</div>
+<div class="note"><b>Checked on day one:</b> install the APIMatic plugin first, then Payouts in the sandbox, the Next.js version, which PayPal button library to use, and the exact Payouts response shapes.</div>
+</main>
+<script>
+const roles=["Judge","Tenant","Linda","Marco","Server","Claude","Rules","PayPal"];
+const steps=[
+{t:"A judge opens the link",r:["Judge","Server"],b:"The server gives their browser a private demo ID and copies the starting data.",f:"lib/demo.ts · app/page.tsx"},
+{t:"The tenant sends a report",r:["Tenant","Server"],b:"Text and a photo are saved as a new job: reported.",f:"app/tenant/page.tsx · app/api/reports/route.ts"},
+{t:"The agent plans it",r:["Server","Claude"],b:"Claude returns a summary, estimate, and 2–4 checklist items. The job is now waiting for approval.",f:"lib/ai.ts → planJob"},
+{t:"Linda approves",r:["Linda","Server","PayPal"],b:"She can edit the plan. The PayPal button creates a hold-only order; she logs in and approves; the server authorizes. \"Held on your PayPal, not charged yet.\"",f:"app/api/jobs/[id]/paypal/* · lib/paypal.ts"},
+{t:"Marco submits proof",r:["Marco","Server"],b:"One photo per item, from the camera or a sample set. Each is shrunk, fingerprinted, and checked for reuse.",f:"components/CameraCapture · lib/photos.ts"},
+{t:"The agent inspects",r:["Server","Claude"],b:"A verdict and reason per item, all saved to the job history.",f:"lib/ai.ts → inspectProof"},
+{t:"The rules decide",r:["Rules"],b:"Needs fix, needs Linda, or pay, depending on the verdicts, reuse flags, attempts, and Linda's limit.",f:"lib/rules.ts"},
+{t:"Paying",r:["Server","PayPal"],b:"Capture the held money into Mendly's sandbox account, then a payout to Marco. Using the job ID as the payout ID stops double payment.",f:"lib/paypal.ts"},
+{t:"Checking payment",r:["Marco","Server","PayPal"],b:"Marco's panel asks every few seconds; the server asks PayPal. Paid shows the amount and time from proof to paid.",f:"app/api/jobs/[id]/payout-status"},
+{t:"Linda decides, when needed",r:["Linda","Server","PayPal"],b:"Pay Marco runs the paying step. Cancel releases the hold, and nobody is charged.",f:"app/api/jobs/[id]/decision"}
+];
+let i=0;const $=id=>document.getElementById(id);
+$("track").innerHTML=steps.map((s,k)=>`<button aria-label="Step ${k+1}: ${s.t}"></button>`).join("");
+[...$("track").children].forEach((b,k)=>b.onclick=()=>{i=k;draw()});
+function draw(){const s=steps[i];$("num").textContent=`Step ${i+1} of ${steps.length}`;$("title").textContent=s.t;$("body").textContent=s.b;$("files").textContent="Built in: "+s.f;
+$("who").innerHTML=roles.map(r=>`<span class="chip${s.r.includes(r)?" on":""}">${r}</span>`).join("");
+[...$("track").children].forEach((b,k)=>b.classList.toggle("done",k<=i));$("prev").disabled=i==0;$("next").disabled=i==steps.length-1}
+$("prev").onclick=()=>{if(i>0){i--;draw()}};$("next").onclick=()=>{if(i<steps.length-1){i++;draw()}};draw();
+</script>
+</body>
+</html>

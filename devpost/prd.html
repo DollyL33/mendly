@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mendly Product Plan</title>
+<style>
+:root{--paper:#FAF7F2;--card:#fff;--ink:#1F2A2E;--muted:#5d686b;--brand:#1E5B4F;--ok:#2F8F5B;--amber:#D98E04;--brick:#B3412E;--line:#E4DED4;--ok-bg:#e5f2ea;--amber-bg:#fbf0d9;--brick-bg:#f6e3df;--brand-bg:#e3eeeb}
+@media (prefers-color-scheme:dark){:root{--paper:#171c1d;--card:#20282a;--ink:#eef0ee;--muted:#a8b2b2;--brand:#7cc3b2;--ok:#7fd3a0;--amber:#f0b54a;--brick:#ee8f7e;--line:#354245;--ok-bg:#1d3a2a;--amber-bg:#3e3119;--brick-bg:#432520;--brand-bg:#1c3631}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+main{max-width:900px;margin:0 auto;padding:40px 16px 72px}
+h1{font-size:2.3rem;margin:0}
+h2{font-size:1.3rem;margin:44px 0 12px;padding-top:10px;border-top:1px solid var(--line)}
+h3{margin:0 0 6px;font-size:1.05rem}
+.lead{color:var(--muted);font-size:1.12rem;margin:6px 0 0}
+.note{background:var(--brand-bg);border-radius:10px;padding:12px 16px;margin:16px 0}
+.money{font-variant-numeric:tabular-nums;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+/* stepper */
+.who{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.chip{font-size:.85rem;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
+.chip.on{background:var(--brand);border-color:var(--brand);color:var(--paper)}
+.track{display:flex;gap:4px;margin:12px 0}
+.track button{flex:1;height:10px;border:0;border-radius:5px;background:var(--line);cursor:pointer;padding:0}
+.track button.done{background:var(--brand)}
+.stepcard{min-height:150px}
+.stepnum{font-size:.85rem;color:var(--muted)}
+.stepnav{display:flex;justify-content:space-between;gap:10px;margin-top:12px}
+.stepnav button{font:inherit;padding:8px 16px;border-radius:8px;border:1px solid var(--brand);background:var(--card);color:var(--brand);cursor:pointer}
+.stepnav button.primary{background:var(--brand);color:var(--paper)}
+.stepnav button:disabled{opacity:.35;cursor:default}
+.outcomes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-top:10px}
+.out{border-radius:10px;padding:10px 14px;border-left:5px solid}
+.out.ok{background:var(--ok-bg);border-color:var(--ok)}
+.out.amber{background:var(--amber-bg);border-color:var(--amber)}
+/* screens */
+.screens{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+details ul{margin:10px 0 4px;padding-left:20px}
+li{margin:4px 0}
+.crit{list-style:none;padding-left:0}
+.crit li{padding-left:26px;position:relative}
+.crit li:before{content:"";position:absolute;left:2px;top:6px;width:13px;height:13px;border:2px solid var(--brand);border-radius:3px}
+.assume{background:var(--amber-bg);border-left:5px solid var(--amber);border-radius:8px;padding:10px 14px;margin:8px 0}
+/* palette */
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.sw{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card)}
+.sw div{height:46px}
+.sw p{margin:0;padding:8px 10px;font-size:.88rem}
+.stamp{display:inline-block;border:2px solid var(--ok);color:var(--ok);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem;padding:2px 8px;border-radius:4px;transform:rotate(-4deg)}
+.states{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
+.st{border-radius:8px;padding:8px 12px;border:1px solid var(--line);background:var(--card)}
+.st b{display:block}
+.st.ok{border-left:5px solid var(--ok)}.st.amber{border-left:5px solid var(--amber)}.st.brick{border-left:5px solid var(--brick)}.st.brand{border-left:5px solid var(--brand)}
+</style>
+</head>
+<body>
+<main>
+<h1>Mendly</h1>
+<p class="lead">Product plan: what each person sees, does, and gets back.</p>
+<div class="note"><b>From scope to product:</b> scope said "Linda approves once and the agent pays Marco." Now we know the screens, the exact money wording, how a judge gets in, and what happens when a photo fails, a photo is reused, or the job is over Linda's limit.</div>
+
+<h2>The journey, step by step</h2>
+<div class="card stepcard" id="stepper">
+<div class="who" id="who"></div>
+<div class="track" id="track"></div>
+<div class="stepnum" id="num"></div>
+<h3 id="title"></h3>
+<div id="body"></div>
+<div class="stepnav"><button id="prev">← Back</button><button id="next" class="primary">Next →</button></div>
+</div>
+<noscript><p>The step-by-step journey needs JavaScript. The full journey is in prd.md under "The Core Journey".</p></noscript>
+
+<h2>Screens</h2>
+<div class="screens">
+<details open><summary>Entry page</summary><ul>
+<li>One-line pitch and a story strip: reported → fixed and proven → verified and paid</li>
+<li><b>Start the guided demo</b> button</li>
+<li>Three role cards: Linda, Marco, the tenant. One click, no sign-up</li></ul></details>
+<details><summary>Top bar (always visible)</summary><ul>
+<li>"Viewing as: Linda ▾" switcher that stays on the same job</li>
+<li>Demo banner with Linda's sandbox PayPal login and copy buttons</li>
+<li>Reset demo</li></ul></details>
+<details><summary>Tenant</summary><ul>
+<li>Report form: description and one photo</li>
+<li>Status of their report, ending in "Fixed and verified"</li></ul></details>
+<details><summary>Linda (desktop-friendly)</summary><ul>
+<li><b>Needs you</b> section, then job tickets</li>
+<li>Ticket: address, problem, amount, money status, plan, checklist, timeline, photos with stamps</li>
+<li>Approve and fund with PayPal, or Decline</li>
+<li>Decision panel: Pay Marco or Cancel job</li>
+<li>Auto-pay limit, default <span class="money">$100</span></li></ul></details>
+<details><summary>Marco (mobile-first)</summary><ul>
+<li>Jobs showing the money is held before he starts</li>
+<li>Big capture button per checklist item, or sample proof photos in demo mode</li>
+<li>Stamp or "what to fix" per item, with retake</li>
+<li>Marco's PayPal panel: status, amount, time from proof to paid</li></ul></details>
+<details><summary>Next-step hint (every screen)</summary><ul>
+<li>"Now it's Marco's turn. Continue as Marco →"</li>
+<li>This is the guided demo, not a separate tour</li></ul></details>
+</div>
+
+<h2>Behaviors and how we'll know they work</h2>
+<details><summary>Repair reports</summary><ul class="crit">
+<li>The form needs a description and one photo before it sends</li>
+<li>The tenant sees status through to "Fixed and verified"</li></ul></details>
+<details><summary>Agent job planning</summary><ul class="crit">
+<li>Ticket shows a problem summary, cost estimate, and 2–4 photo checklist items</li>
+<li>Each item describes a photo Marco can actually take</li></ul>
+<ul class="crit"><li>Linda can edit the amount and checklist before approving</li></ul></details>
+<details><summary>Approval and funding</summary><ul class="crit">
+<li>Approve opens the real PayPal sandbox flow; then "Held on your PayPal, not charged yet"</li>
+<li>Decline closes the job with nothing held</li>
+<li>Closing PayPal without approving leaves "Waiting for your approval"</li></ul></details>
+<details><summary>Proof submission</summary><ul class="crit">
+<li>Live camera per checklist item</li>
+<li>Demo sample sets: one passes, one has a problem, one contains a reused photo</li>
+<li>Can't submit until every item has a photo</li></ul></details>
+<details><summary>AI inspection</summary>
+<p><span class="stamp">Verified</span> &nbsp;New faucet is installed under the sink with water running.</p>
+<ul class="crit">
+<li>Each item gets a Verified stamp or Problem mark with one plain sentence</li>
+<li>Failed items say exactly what to fix</li>
+<li>A reused photo is flagged no matter what the AI thinks of it</li>
+<li>Text written inside a photo has no effect</li></ul></details>
+<details><summary>Fix and resend</summary><ul class="crit">
+<li>Marco resubmits only failed items</li>
+<li>A second failure sends the job to Linda</li></ul></details>
+<details><summary>Automatic payment</summary><ul class="crit">
+<li>All verified, nothing flagged, at or under the limit: pays with no action from Linda</li>
+<li>Marco sees "Payment on its way", then <span class="money">"Paid $85"</span> with time to paid</li>
+<li>Linda's ticket shows it was handled without her</li>
+<li>The limit is enforced by app rules, not the AI</li></ul></details>
+<details><summary>Linda's decisions</summary><ul class="crit">
+<li>Over limit, failed twice, or flagged jobs appear under Needs you, with the reason</li>
+<li>Pay Marco pays him and records her approval</li>
+<li>Cancel job releases the hold; nobody is charged</li>
+<li>Changing her limit applies to new decisions</li></ul></details>
+<details><summary>Job record</summary><ul class="crit">
+<li>Every ticket shows the full timed history, from report to payment</li></ul></details>
+<details><summary>Demo experience</summary><ul class="crit">
+<li>Each visitor gets their own demo data</li>
+<li>Reset restores the start</li>
+<li>Seeded jobs: <span class="money">$180</span> wall patch waiting for Linda, a paid job, a flagged reused-photo job</li>
+<li>Next-step hint with role switch on every screen</li></ul></details>
+
+<h2>States</h2>
+<div class="states">
+<div class="st brand"><b>Waiting for approval</b>Plan shown; Marco can't start</div>
+<div class="st brand"><b>Money held</b>"Held on your PayPal, not charged yet"</div>
+<div class="st brand"><b>Inspection running</b>Each item shows it's being checked</div>
+<div class="st brick"><b>Partly failed</b>Failed items say what to fix</div>
+<div class="st amber"><b>Needs Linda</b>Reason in plain words</div>
+<div class="st amber"><b>Payment on its way</b>Until PayPal confirms</div>
+<div class="st ok"><b>Paid</b>Amount and time to paid</div>
+<div class="st"><b>Cancelled</b>Hold released, shown to all</div>
+<div class="st brick"><b>PayPal or AI error</b>Plain message and retry</div>
+</div>
+<div class="note"><b>Confirmed:</b> if the AI check can't run, nothing pays automatically and the job goes to Linda. An unclear tenant photo still gets a plan, with the uncertainty marked for Linda.</div>
+
+<h2>Look and feel</h2>
+<p><i>"A calm, precise job ticket: warm paper, deep workshop green, receipt-clear money, and AI verification shown as inspection stamps with photo evidence, never as sparkles or chat."</i></p>
+<div class="swatches">
+<div class="sw"><div style="background:#FAF7F2"></div><p>Warm paper<br><span class="money">#FAF7F2</span></p></div>
+<div class="sw"><div style="background:#1F2A2E"></div><p>Slate ink<br><span class="money">#1F2A2E</span></p></div>
+<div class="sw"><div style="background:#1E5B4F"></div><p>Workshop green<br><span class="money">#1E5B4F</span></p></div>
+<div class="sw"><div style="background:#2F8F5B"></div><p>Verified / paid<br><span class="money">#2F8F5B</span></p></div>
+<div class="sw"><div style="background:#D98E04"></div><p>Needs you<br><span class="money">#D98E04</span></p></div>
+<div class="sw"><div style="background:#B3412E"></div><p>Problem<br><span class="money">#B3412E</span></p></div>
+<div class="sw"><div style="background:#E4DED4"></div><p>Lines<br><span class="money">#E4DED4</span></p></div>
+</div>
+<details><summary>Type, references, and what to avoid</summary><ul>
+<li><b>Type:</b> warm sans-serif (Figtree or IBM Plex Sans); money in a tabular font, big and plain</li>
+<li><b>Feel references only:</b> Mercury, Apple Wallet receipts, Things, a paper job ticket</li>
+<li><b>Avoid:</b> purple/blue gradients, AI sparkles, robot icons, chat bubbles, neon or glassy styling, emoji everywhere, vague "AI magic" wording, anything resembling PayPal's own app</li></ul></details>
+
+<h2>Not now</h2>
+<details><summary>Deferred from the proof of concept</summary><ul>
+<li>Real accounts and logins: demo roles prove the flow</li>
+<li>SMS or email notifications: in-app status shows the same thing</li>
+<li>Choosing among handymen: one saved handyman</li>
+<li>Multiple properties: one is enough to prove it</li></ul></details>
+<details><summary>Later enhancements</summary><ul>
+<li>GPS and time checks, before-and-after matching, random challenge shots</li>
+<li>80/20 holdback, trust that builds over time, refunds and disputes, emergency handling</li></ul></details>
+<details><summary>Non-goals</summary><ul>
+<li>Chat interface, marketplace, native apps, real money</li>
+<li>Claims of being first or fraud-proof</li>
+<li>Looking like PayPal's own app</li></ul></details>
+
+<h2>Open questions</h2>
+<ul>
+<li><b>For the spec:</b> protecting the public sandbox login; confirming PayPal hold, capture, and payout steps; choosing the AI provider</li>
+</ul>
+</main>
+<script>
+const roles=["Judge","Tenant","Agent","Linda","PayPal","Marco"];
+const steps=[
+{t:"A judge arrives",r:["Judge"],b:"<p>Entry page: one-line pitch, story strip, and <b>Start the guided demo</b>. No sign-up, no password.</p>"},
+{t:"The tenant reports a problem",r:["Tenant"],b:"<p>A sentence and a photo: \"Kitchen faucet is leaking.\"</p>"},
+{t:"The agent plans the job",r:["Agent"],b:"<p>Problem summary, cost estimate, and a photo checklist of 2–4 items, shown on Linda's ticket.</p>"},
+{t:"Linda approves once",r:["Linda","PayPal"],b:"<p>She approves through PayPal with the sandbox login from the demo banner.</p><p class='money'>Held on your PayPal, not charged yet</p>"},
+{t:"Marco sees a funded job",r:["Marco"],b:"<p>The money is held before he starts. He sees the address, problem, and checklist.</p>"},
+{t:"Marco submits proof",r:["Marco"],b:"<p>Live camera per checklist item, or a sample photo set in demo mode.</p>"},
+{t:"The agent inspects each photo",r:["Agent"],b:"<p><span class='stamp'>Verified</span> or a Problem mark beside each photo, with one plain sentence. A reused photo is caught.</p>"},
+{t:"Marco fixes and resends",r:["Marco","Agent"],b:"<p>Only the failed items. A second failure sends the job to Linda.</p>"},
+{t:"The outcome",r:["Agent","PayPal","Linda"],b:"<div class='outcomes'><div class='out ok'><b>At or under <span class='money'>$100</span>, all verified</b><br>Marco is paid automatically: \"Payment on its way\", then <span class='money'>\"Paid $85\"</span>. Linda does nothing.</div><div class='out amber'><b>Over the limit, failed twice, or flagged</b><br>Goes to Linda: Pay Marco or Cancel job.</div></div>"},
+{t:"Everyone sees the result",r:["Tenant","Linda","Marco"],b:"<p>Tenant: \"Fixed and verified.\" Linda: the full record from report to payment. Marco: paid, with time from proof to paid.</p>"}
+];
+let i=0;const $=id=>document.getElementById(id);
+$("track").innerHTML=steps.map((s,k)=>`<button aria-label="Step ${k+1}: ${s.t}"></button>`).join("");
+[...$("track").children].forEach((b,k)=>b.onclick=()=>{i=k;draw()});
+function draw(){const s=steps[i];$("num").textContent=`Step ${i+1} of ${steps.length}`;$("title").textContent=s.t;$("body").innerHTML=s.b;
+$("who").innerHTML=roles.map(r=>`<span class="chip${s.r.includes(r)?" on":""}">${r}</span>`).join("");
+[...$("track").children].forEach((b,k)=>b.classList.toggle("done",k<=i));$("prev").disabled=i==0;$("next").disabled=i==steps.length-1}
+$("prev").onclick=()=>{if(i>0){i--;draw()}};$("next").onclick=()=>{if(i<steps.length-1){i++;draw()}};draw();
+</script>
+</body>
+</html>

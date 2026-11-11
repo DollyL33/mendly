@@ -1,0 +1,28 @@
+:root {
+  --paper: #faf7f2;
+  --ink: #1f2a2e;
+  --brand: #1e5b4f;
+  --ok: #2f8f5b;
+  --attention: #d98e04;
+  --problem: #b3412e;
+  --line: #e4ded4;
+  --muted: #5b6669;
+  --card: #ffffff;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.money, .mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}

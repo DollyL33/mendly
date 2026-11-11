@@ -1,0 +1,30 @@
+{
+  "name": "mendly",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An AI repair agent for small landlords: verified by AI, paid through PayPal.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "check:paypal": "tsx --env-file=.env.local scripts/check-paypal.ts"
+  },
+  "dependencies": {
+    "@paypal/paypal-server-sdk": "^2.5.0",
+    "next": "^16.4.6",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mendly Scope</title>
+<style>
+:root{--bg:#f7f6f2;--card:#fff;--ink:#1f2a2e;--muted:#5c686d;--line:#dcdad2;--agent:#0f6e66;--agent-bg:#dff1ee;--human:#a3520f;--human-bg:#fbeadb;--pay:#2a4fa0;--pay-bg:#e2e9f8}
+@media (prefers-color-scheme:dark){:root{--bg:#14191b;--card:#1d2427;--ink:#eef1f0;--muted:#a5b0b3;--line:#334045;--agent:#6fd3c6;--agent-bg:#17352f;--human:#f2ae74;--human-bg:#40291a;--pay:#a4bdf5;--pay-bg:#1f2b47}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:40px 16px 64px}
+h1{font-size:2.4rem;margin:0 0 6px}
+h2{font-size:1.3rem;margin:40px 0 12px}
+.lead{font-size:1.15rem;color:var(--muted);margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:12px 0}
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.people .card{margin:0}
+.people h3{margin:0 0 6px;font-size:1.05rem}
+.people p{margin:0;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.9rem;color:var(--muted);margin-bottom:12px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.flow{list-style:none;margin:0;padding:0}
+.step{display:flex;gap:12px;align-items:flex-start;border-left:5px solid;border-radius:8px;padding:10px 14px;margin-bottom:6px}
+.step b{display:block}
+.step span{color:var(--muted);font-size:.95rem}
+.agent{border-color:var(--agent);background:var(--agent-bg)}
+.human{border-color:var(--human);background:var(--human-bg)}
+.pay{border-color:var(--pay);background:var(--pay-bg)}
+.fork{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px;margin-top:8px}
+.fork .step{margin:0}
+.arrow{text-align:center;color:var(--muted);line-height:1.1;margin:0 0 6px}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+details ul{margin:10px 0 2px;padding-left:20px}
+details li{margin:4px 0}
+.moment{border-left:5px solid var(--human);background:var(--card);padding:14px 18px;border-radius:8px}
+</style>
+</head>
+<body>
+<main>
+<h1>Mendly</h1>
+<p class="lead">An AI repair agent for small landlords. It takes a tenant's repair report all the way to a verified, paid job, and only comes back to the owner when something needs a human.</p>
+
+<h2>What makes it different</h2>
+<div class="card">The agent runs the whole repair, not just one step. The owner approves the money once, then the agent checks the proof and pays the handyman through PayPal, inside limits that code enforces.</div>
+
+<h2>Who it's for</h2>
+<div class="people">
+<div class="card"><h3>Linda, the owner</h3><p>Manages a rental in another city herself. Pays on trust today because she can't go and look.</p></div>
+<div class="card"><h3>Marco, the handyman</h3><p>Linda's own trusted worker. Can wait a long time to be paid, and doesn't know the money is there before he starts.</p></div>
+<div class="card"><h3>The tenant</h3><p>Just needs a quick way to report a problem.</p></div>
+</div>
+
+<h2>How one repair flows</h2>
+<div class="legend"><span><i style="background:var(--agent)"></i>Agent acts</span><span><i style="background:var(--human)"></i>A person acts</span><span><i style="background:var(--pay)"></i>PayPal moves money</span></div>
+<ol class="flow">
+<li class="step human"><div><b>Tenant reports a problem</b><span>A short form with a photo</span></div></li>
+<li class="arrow" aria-hidden="true">↓</li>
+<li class="step agent"><div><b>Agent plans the job</b><span>Works out the problem, cost, and photo checklist</span></div></li>
+<li class="arrow" aria-hidden="true">↓</li>
+<li class="step human"><div><b>Linda approves once</b><span>Reviews the plan and approves in PayPal</span></div></li>
+<li class="arrow" aria-hidden="true">↓</li>
+<li class="step pay"><div><b>Money is held</b><span>Marco can see it's there before he starts</span></div></li>
+<li class="arrow" aria-hidden="true">↓</li>
+<li class="step human"><div><b>Marco does the work</b><span>Takes proof photos with the live camera</span></div></li>
+<li class="arrow" aria-hidden="true">↓</li>
+<li class="step agent"><div><b>Agent checks every photo</b><span>A result and a reason for each. If one fails, Marco is told exactly what to fix and sends it again</span></div></li>
+<li class="arrow" aria-hidden="true">↓</li>
+<li class="fork">
+<div class="step pay"><div><b>All passed, under the limit</b><span>Marco is paid automatically. Linda does nothing</span></div></div>
+<div class="step human"><div><b>Looks off, failed twice, or over the limit</b><span>Linda decides: pay or cancel</span></div></div>
+</li>
+</ol>
+
+<h2>The demo</h2>
+<div class="card">Two jobs show both sides of the product, with Linda's limit set at $100:
+<ul>
+<li><b>$85 faucet repair:</b> Marco is paid with no input from Linda after her first approval.</li>
+<li><b>$180 wall patch:</b> over her limit, so the agent stops and asks her.</li>
+</ul></div>
+<div class="moment"><b>The "oh, that's cool" moment:</b> Marco uploads a reused photo and the agent rejects it. He takes a real one, it passes, and the payment arrives on screen while Linda's phone shows she never had to step in. The video closes on one record of the whole job.</div>
+
+<h2>What's in, what's not</h2>
+<details open><summary>Now: in the build</summary><ul>
+<li>Web app with tenant, owner, and handyman views, using demo logins</li>
+<li>One landlord, one property, one saved handyman</li>
+<li>Tenant report form with a photo</li>
+<li>AI job plan: problem, cost estimate, photo checklist</li>
+<li>Owner approval through PayPal, holding the money before work starts</li>
+<li>Live camera upload, with an AI check and reason per photo</li>
+<li>Reused-photo detection</li>
+<li>Fix-and-resend loop for Marco</li>
+<li>Auto-pay under the owner's limit (default $100), enforced in code</li>
+<li>Owner decision screen: pay or cancel the job</li>
+<li>Job record showing every step</li>
+<li>Hosted demo that stays up through Dec 15, 2026, and a public repo with an open source license</li>
+</ul></details>
+<details><summary>Later: worth doing, not now</summary><ul>
+<li>GPS and time checks</li>
+<li>Before-and-after photo matching</li>
+<li>Random challenge shots</li>
+<li>80/20 payment holdback</li>
+<li>Trust that builds with a clean record</li>
+<li>Refunds and disputes after payment</li>
+<li>Emergency handling</li>
+<li>Note-in-the-photo trick demo, if time allows</li>
+</ul></details>
+<details><summary>Cut: and why</summary><ul>
+<li><b>Finding new handymen:</b> a marketplace is a different product, and the agent only uses the owner's trusted handyman.</li>
+<li><b>Native mobile apps:</b> a web app works on a phone, and there's no time to build more.</li>
+<li><b>Real SMS or email:</b> in-app updates prove the same flow.</li>
+<li><b>Multiple properties and owners:</b> they add work without proving anything new.</li>
+<li><b>Real money:</b> the hackathon uses the PayPal sandbox.</li>
+<li><b>Claims of being first or fraud-proof:</b> we can't support them. We say "harder to fake."</li>
+</ul></details>
+</main>
+</body>
+</html>
