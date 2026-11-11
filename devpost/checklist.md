@@ -19,7 +19,7 @@ Build mode: learn
   Learner check: Open the approval link, log in as Linda's sandbox account and approve. Then log into Marco's sandbox account at sandbox.paypal.com and confirm $85 arrived.
   Commit: `Set up project and prove the PayPal money path`
 
-- [ ] **2. A tenant report becomes an AI job plan on Linda's ticket**
+- [x] **2. A tenant report becomes an AI job plan on Linda's ticket**
   Becomes usable: In the browser, the tenant describes a problem and adds a photo. Seconds later, Linda's ticket shows Claude's summary, cost estimate, and a 2-4 item photo checklist, which she can edit.
   Why now: This is the first half of the agent, and the first real screen. It sets up the database, the private demo ID, the event log, and the look and feel that every later slice builds on.
   PRD ref: `prd.md > Repair reports`, `prd.md > Agent job planning`, `prd.md > Look and Feel`, `prd.md > States and Boundaries` (unclear tenant photo)
@@ -81,7 +81,7 @@ Build mode: learn
 
 ## Hands-on Checkpoints
 
-- [ ] Early usable behavior explored — after slice 2 (first screens and the AI plan, while look and feel can still change cheaply)
+- [x] Early usable behavior explored — after slice 2 (first screens and the AI plan, while look and feel can still change cheaply)
 - [ ] Full core journey explored — after slice 5 (the whole repair running for real)
 - [ ] Final kick-the-tires exploration and feedback completed
 
