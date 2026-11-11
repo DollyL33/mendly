@@ -13,7 +13,7 @@ Source: `scope.md > The Core Loop`, `scope.md > What "Working" Looks Like`.
 
 1. **A judge arrives.** They land on the entry page, read a one-line pitch and a three-step story strip, and pick a role or start the guided flow. No sign-up, no password.
 2. **The tenant reports a problem.** They describe it in a sentence and add a photo, for example a leaking kitchen faucet.
-3. **The agent plans the job.** It writes a short problem summary, a cost estimate, and a photo checklist of 2-4 items. This appears on Linda's job ticket.
+3. **The agent plans the job.** It writes a short problem summary, a cost estimate, and a photo checklist of 2 items. This appears on Linda's job ticket.
 4. **Linda reviews and approves once.** She checks the plan and approves through PayPal using the sandbox login in the demo banner. The money is held on her PayPal account but not charged yet.
 5. **Marco sees a funded job.** His view shows the money is held, the address, the problem, and the checklist.
 6. **Marco submits proof.** He takes a photo per checklist item with the live camera, or picks a sample photo set in demo mode.
@@ -97,7 +97,7 @@ Paths `/demo/linda`, `/demo/marco` and `/demo/tenant` open each view directly. T
 ### Agent job planning
 Source: `scope.md > The Core Loop`, step 2.
 - As Linda, I want the agent to turn a report into a clear job so that I can approve it in seconds.
-  - [ ] The ticket shows a plain-language problem summary, a cost estimate, and 2-4 photo checklist items.
+  - [ ] The ticket shows a plain-language problem summary, a cost estimate, and 2 photo checklist items (the repaired thing, then the fix working).
   - [ ] Each checklist item describes a photo Marco can actually take, such as "New faucet installed under the sink, water running."
   - [ ] Linda can edit the amount and checklist before approving.
 

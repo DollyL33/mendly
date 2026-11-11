@@ -107,7 +107,7 @@ li{margin:4px 0}
 <li>The form needs a description and one photo before it sends</li>
 <li>The tenant sees status through to "Fixed and verified"</li></ul></details>
 <details><summary>Agent job planning</summary><ul class="crit">
-<li>Ticket shows a problem summary, cost estimate, and 2–4 photo checklist items</li>
+<li>Ticket shows a problem summary, cost estimate, and 2 photo checklist items</li>
 <li>Each item describes a photo Marco can actually take</li></ul>
 <ul class="crit"><li>Linda can edit the amount and checklist before approving</li></ul></details>
 <details><summary>Approval and funding</summary><ul class="crit">
@@ -200,7 +200,7 @@ const roles=["Judge","Tenant","Agent","Linda","PayPal","Marco"];
 const steps=[
 {t:"A judge arrives",r:["Judge"],b:"<p>Entry page: one-line pitch, story strip, and <b>Start the guided demo</b>. No sign-up, no password.</p>"},
 {t:"The tenant reports a problem",r:["Tenant"],b:"<p>A sentence and a photo: \"Kitchen faucet is leaking.\"</p>"},
-{t:"The agent plans the job",r:["Agent"],b:"<p>Problem summary, cost estimate, and a photo checklist of 2–4 items, shown on Linda's ticket.</p>"},
+{t:"The agent plans the job",r:["Agent"],b:"<p>Problem summary, cost estimate, and a photo checklist of 2 items, shown on Linda's ticket.</p>"},
 {t:"Linda approves once",r:["Linda","PayPal"],b:"<p>She approves through PayPal with the sandbox login from the demo banner.</p><p class='money'>Held on your PayPal, not charged yet</p>"},
 {t:"Marco sees a funded job",r:["Marco"],b:"<p>The money is held before he starts. He sees the address, problem, and checklist.</p>"},
 {t:"Marco submits proof",r:["Marco"],b:"<p>Live camera per checklist item, or a sample photo set in demo mode.</p>"},

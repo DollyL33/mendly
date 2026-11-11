@@ -112,3 +112,4 @@ Activity mode:
 - `scripts/check-rules.ts` added (`npm run check:rules`) to verify the payment rules and fingerprint without AI or PayPal.
 - Hosted at https://mendly-hed3.onrender.com (Render Starter, 1 GB disk at `/var/data`); a job and its photo survived two redeploys. The learner ran the full story on a phone with the live camera, ending in "Paid $85.00".
 - License is MIT (chosen by the agent to meet the open-source rule; offered Apache 2.0 as an alternative).
+- Planner now asks for exactly 2 proof photos (the repaired thing close up, then the fix working) — the learner found Linda had to delete a third, under-sink photo every run because no sample covered it; 2 photos is simpler for judges and real handymen. PRD and spec updated.

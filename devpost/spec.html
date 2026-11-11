@@ -121,7 +121,7 @@ th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertic
 <h2>The parts, and what they serve</h2>
 <details><summary>Demo sessions and seeding <small>· Demo experience</small></summary><p>A private demo ID per visitor, kept in a cookie. Seeds: the <span class="mono">$180</span> wall patch (live from approval onward), plus two labeled sample jobs. Reset wipes and reseeds. <code>lib/demo.ts</code></p></details>
 <details><summary>Screens <small>· Screens and Layout</small></summary><p>Entry page, <code>/demo/linda|marco|tenant</code> shortcuts, tenant view, Linda's list and ticket, Marco's list and job screen. Top bar and next-step hint on every screen. <code>app/</code>, <code>components/</code></p></details>
-<details><summary>Repair reports and job planner <small>· Repair reports, Agent job planning</small></summary><p>Text plus a photo go to Claude, which returns a summary, estimate, 2–4 checklist items, and any uncertainty notes. <code>app/api/reports</code>, <code>lib/ai.ts</code></p></details>
+<details><summary>Repair reports and job planner <small>· Repair reports, Agent job planning</small></summary><p>Text plus a photo go to Claude, which returns a summary, estimate, 2 checklist items, and any uncertainty notes. <code>app/api/reports</code>, <code>lib/ai.ts</code></p></details>
 <details><summary>PayPal client <small>· Approval and funding, Automatic payment</small></summary><ul>
 <li><i>Through PayPal's Server SDK where it has the call; direct calls otherwise.</i></li>
 <li>Create order (authorize) → <code>POST /v2/checkout/orders</code></li>
@@ -167,7 +167,7 @@ const roles=["Judge","Tenant","Linda","Marco","Server","Claude","Rules","PayPal"
 const steps=[
 {t:"A judge opens the link",r:["Judge","Server"],b:"The server gives their browser a private demo ID and copies the starting data.",f:"lib/demo.ts · app/page.tsx"},
 {t:"The tenant sends a report",r:["Tenant","Server"],b:"Text and a photo are saved as a new job: reported.",f:"app/tenant/page.tsx · app/api/reports/route.ts"},
-{t:"The agent plans it",r:["Server","Claude"],b:"Claude returns a summary, estimate, and 2–4 checklist items. The job is now waiting for approval.",f:"lib/ai.ts → planJob"},
+{t:"The agent plans it",r:["Server","Claude"],b:"Claude returns a summary, estimate, and 2 checklist items. The job is now waiting for approval.",f:"lib/ai.ts → planJob"},
 {t:"Linda approves",r:["Linda","Server","PayPal"],b:"She can edit the plan. The PayPal button creates a hold-only order; she logs in and approves; the server authorizes. \"Held on your PayPal, not charged yet.\"",f:"app/api/jobs/[id]/paypal/* · lib/paypal.ts"},
 {t:"Marco submits proof",r:["Marco","Server"],b:"One photo per item, from the camera or a sample set. Each is shrunk, fingerprinted, and checked for reuse.",f:"components/CameraCapture · lib/photos.ts"},
 {t:"The agent inspects",r:["Server","Claude"],b:"A verdict and reason per item, all saved to the job history.",f:"lib/ai.ts → inspectProof"},

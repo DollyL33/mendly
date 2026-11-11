@@ -29,8 +29,8 @@ export function nextStep(role: Role, job: Job | undefined, limitCents: number): 
       return role === "linda"
         ? {
             text: overLimit
-              ? `This job is over your auto-pay limit, so you'll decide on payment at the end. To see auto-pay, set the amount at or under your limit. The sample proof photos cover "tap off" and "tap running"; remove other items, or Marco uses the live camera.`
-              : `Approve with the PayPal button using the sandbox login above. The money is held, not charged. The sample proof photos cover "tap off" and "tap running"; remove other items, or Marco uses the live camera.`,
+              ? `This job is over your auto-pay limit, so you'll decide on payment at the end. To see auto-pay, set the amount at or under your limit.`
+              : `Approve with the PayPal button using the sandbox login above. The money is held, not charged.`,
           }
         : { text: "Now it's Linda's turn: she reviews the agent's plan and approves it in PayPal.", href: lindaJob(job), cta: "Continue as Linda →" };
     case "funded":

@@ -16,7 +16,7 @@ Open **https://mendly-hed3.onrender.com** on a computer or phone. No sign-up: yo
 
 1. Click **Start the guided demo**. You're the **tenant**.
 2. Click **Use an example report**, then **Send report**. In a few seconds the AI agent turns it into a job: a summary, a price estimate and a checklist of proof photos.
-3. Click **Continue as Linda →** in the green **Next** bar (Linda is the landlord). Click **Edit amount or checklist**, set the amount to **85** (under her $100 auto-pay limit), keep only **"tap off"** and **"tap running"** (the sample photos cover those two), and **Save plan**.
+3. Click **Continue as Linda →** in the green **Next** bar (Linda is the landlord). Click **Edit amount or checklist**, set the amount to **85** (under her $100 auto-pay limit), and **Save plan**.
 4. Click the **PayPal** button. Log in with **Linda's sandbox login** from the dark banner at the top (use its **Copy** buttons) and approve. The ticket reads **"Held on your PayPal, not charged yet."**
 5. Click **Continue as Marco →** (the handyman). Click **Set A: passes**, then **Send 2 photos for checking**. Each photo gets a **Verified** stamp with the agent's reason.
 6. Watch the payment land: with no action from Linda, Marco's panel goes from **"Payment on its way"** to **"Paid $85.00"**, with the seconds from proof to payment.
@@ -39,7 +39,7 @@ Open **https://mendly-hed3.onrender.com** on a computer or phone. No sign-up: yo
 Tenant report + photo
    │
    ▼
-Claude (planner) ─► summary, estimate, 2–4 proof photos          [lib/ai.ts → planJob]
+Claude (planner) ─► summary, estimate, 2 proof photos            [lib/ai.ts → planJob]
    │
    ▼
 Linda approves in PayPal ─► Orders v2, intent AUTHORIZE: money held  [lib/paypal.ts]
@@ -74,7 +74,7 @@ Payment rules (plain code, no AI)                                    [lib/rules.
 ## AI tools used
 
 - **Claude Opus 5.5 (`claude-opus-5-5`) via the Anthropic API, inside the app.** Two calls per job, both with structured outputs (a JSON schema the answer must fit):
-  - **Planner:** reads the tenant's photo and words; returns a summary, a cost estimate, 2–4 proof-photo instructions, and what it couldn't tell from the photo.
+  - **Planner:** reads the tenant's photo and words; returns a summary, a cost estimate, 2 proof-photo instructions (the repaired thing, then the fix working), and what it couldn't tell from the photo.
   - **Inspector:** reads every proof photo against its checklist item; returns pass or fail, a one-sentence reason, and a fix instruction.
 - **Claude Code (Claude Opus 5.5) to build it.** The app was planned and written with Claude Code, from a written scope, product requirements and technical spec (in `devpost/`). PayPal SDK calls were checked against the SDK's own type definitions.
 - **Not AI, on purpose:** reused-photo detection (a 64-bit difference hash in `lib/photos.ts`) and the payment rules (`lib/rules.ts`). `npm run check:rules` tests both without AI or PayPal.

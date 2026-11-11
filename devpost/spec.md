@@ -28,7 +28,7 @@ PRD ref: `prd.md > The Core Journey`.
 
 1. **A judge opens the link.** The server gives their browser a private demo ID, a random code kept in a cookie, and copies the starting demo data for that ID. They see the entry page.
 2. **The tenant sends a report.** The text and photo go to the server, which saves the photo and creates a job with status *reported*.
-3. **The agent plans it.** The server sends the report text and photo to Claude, which returns a summary, cost estimate, and 2-4 checklist items. These are saved, and the job becomes *waiting for approval*.
+3. **The agent plans it.** The server sends the report text and photo to Claude, which returns a summary, cost estimate, and 2 checklist items. These are saved, and the job becomes *waiting for approval*.
 4. **Linda approves.** She can edit the amount and checklist. Clicking the PayPal button makes the server ask PayPal to create an order set to *authorize*, which means hold, not charge. Linda logs into her sandbox account in PayPal's window and approves. The server asks PayPal to authorize, saves the authorization ID, and the job becomes *funded*: "Held on your PayPal, not charged yet."
 5. **Marco submits proof.** One photo per checklist item, from the live camera or a sample set. The server shrinks each photo, fingerprints it, and checks for reuse.
 6. **The agent inspects.** The server sends the checklist and photos to Claude, which returns a verdict and reason per item. Every result is saved to the job's history.
@@ -149,7 +149,7 @@ PRD ref: `prd.md > Repair reports`.
 
 ### Job planner (`lib/ai.ts > planJob`)
 - One Claude call with the report text and photo.
-- Returns `{summary, estimateUsd, checklist: [{label, photoInstruction}] (2-4), uncertainNotes}`.
+- Returns `{summary, estimateUsd, checklist: [{label, photoInstruction}] (exactly 2), uncertainNotes}`.
 - If the tenant's photo is unclear, it still returns a plan, with `uncertainNotes` shown to Linda.
 
 PRD ref: `prd.md > Agent job planning`.
