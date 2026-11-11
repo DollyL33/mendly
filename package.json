@@ -5,7 +5,7 @@
   "description": "An AI repair agent for small landlords: verified by AI, paid through PayPal.",
   "license": "MIT",
   "engines": {
-    "node": ">=20"
+    "node": "22.x"
   },
   "scripts": {
     "dev": "next dev",

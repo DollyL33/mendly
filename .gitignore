@@ -20,3 +20,9 @@ next-env.d.ts
 
 # Original sample photos (may contain GPS data); only cleaned copies are committed
 /public/samples/raw
+
+# Devpost Learn course tooling (not part of Mendly)
+/.claude/
+/.agents/
+/agent/
+/skills-lock.json
