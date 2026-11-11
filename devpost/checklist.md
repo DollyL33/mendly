@@ -83,24 +83,24 @@ Build mode: learn
 
 - [x] Early usable behavior explored — after slice 2 (first screens and the AI plan, while look and feel can still change cheaply)
 - [x] Full core journey explored — after slice 5 (the whole repair running for real)
-- [ ] Final kick-the-tires exploration and feedback completed
+- [x] Final kick-the-tires exploration and feedback completed
 
 ## Final Review
 
 - [x] Linda no longer has to delete a third (under-sink) photo — planner asks for exactly 2 photos; learner retested on the live site and it worked.
-- [ ] Final review complete — feedback resolved and learner confirms ready to ship
+- [x] Final review complete — feedback resolved and learner confirms ready to ship
 
 ## Code Tour and App Map
 
-- [ ] Learning activity complete — guided route, focused alternative, prior practice connected, or brief recap
-- [ ] Optional edit and transfer reflection addressed — offered/declined/already covered/not applicable as appropriate
-- [ ] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
+- [x] Learning activity complete — guided route, focused alternative, prior practice connected, or brief recap
+- [x] Optional edit and transfer reflection addressed — offered/declined/already covered/not applicable as appropriate
+- [x] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
 
-Activity and evidence:
-Route and stops:
-Edit outcome:
-Reflection:
-Activity mode:
+Activity and evidence: Prior practice connected — during the build the learner asked how the AI part works and how base64 looks; we followed Marco's proof through ProofCapture → proof route → fingerprint → inspectProof → rules, and encoded their own photo to base64.
+Route and stops: components/ProofCapture.tsx; app/api/jobs/[id]/proof/route.ts; lib/photos.ts (fingerprint, findReuse); lib/ai.ts (inspectProof, imageBlock); lib/rules.ts (decide); lib/payment.ts.
+Edit outcome: Not applicable — skipped for the deadline; the learner directed real changes instead (two-photo checklist, sample-set reuse, PayPal review fixes).
+Reflection: Offered with the app map.
+Activity mode: Prior practice connected, plus app map.
 
 ## Revisions
 
