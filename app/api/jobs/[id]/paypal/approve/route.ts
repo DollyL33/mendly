@@ -35,7 +35,18 @@ export async function POST(request: Request, ctx: RouteContext<"/api/jobs/[id]/p
     );
     return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error("authorizeOrder failed", describePayPalError(err));
+    const detail = describePayPalError(err);
+    console.error("authorizeOrder failed", detail);
+    // The payment method itself was declined: Linda can approve again with a different one.
+    if (detail.includes("INSTRUMENT_DECLINED")) {
+      return NextResponse.json(
+        {
+          error:
+            "PayPal declined that payment method. Nothing was charged. Click the PayPal button again and choose a different card or bank account.",
+        },
+        { status: 402 },
+      );
+    }
     return NextResponse.json(
       { error: "PayPal couldn't place the hold. Nothing was charged. Try approving again." },
       { status: 502 },

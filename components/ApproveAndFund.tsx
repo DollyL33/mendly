@@ -10,6 +10,8 @@ export function ApproveAndFund({ jobId, amountLabel }: { jobId: string; amountLa
   const [message, setMessage] = useState<{ tone: "attention" | "problem"; text: string } | null>(null);
   const [busy, setBusy] = useState<null | "holding" | "declining">(null);
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
+  // Sandbox unless explicitly switched to live money with NEXT_PUBLIC_PAYPAL_ENVIRONMENT=production.
+  const environment = process.env.NEXT_PUBLIC_PAYPAL_ENVIRONMENT === "production" ? "production" : "sandbox";
 
   async function decline() {
     if (!confirm("Decline this job? Nothing will be held or charged.")) return;
@@ -39,7 +41,7 @@ export function ApproveAndFund({ jobId, amountLabel }: { jobId: string; amountLa
         ) : busy === "holding" ? (
           <p className="notice notice-attention">Placing the hold with PayPal…</p>
         ) : (
-          <PayPalProvider clientId={clientId} environment="sandbox" components={["paypal-payments"]} pageType="checkout">
+          <PayPalProvider clientId={clientId} environment={environment} components={["paypal-payments"]} pageType="checkout">
             <PayPalOneTimePaymentButton
               presentationMode="auto"
               createOrder={async () => {

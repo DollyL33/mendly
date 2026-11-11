@@ -95,6 +95,9 @@ export async function createAuthorizeOrder(opts: CreateOrderOptions) {
         : {}),
     },
     prefer: "return=representation",
+    // Idempotency: a retried request for the same job and amount returns the same order instead of a second one.
+    // (A new amount, e.g. after Linda edits the plan, gets a new order.)
+    paypalRequestId: `order-${opts.jobId}-${opts.amountCents}${opts.payeeEmail ? "-payee" : ""}`,
   });
   const approveLink = result.links?.find((l) => l.rel === "approve" || l.rel === "payer-action")?.href;
   if (!result.id) throw new Error("PayPal did not return an order ID.");
