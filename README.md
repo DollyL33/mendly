@@ -4,7 +4,7 @@
 
 Mendly is an AI repair agent for small landlords who manage their own rentals. A tenant reports a problem with a photo. The agent plans the job, the landlord approves once in PayPal (the money is held, not charged), the handyman sends proof photos, and the agent checks each one. If everything is verified and the job is within the landlord's limit, Mendly pays the handyman automatically. Otherwise it asks the landlord.
 
-**Live demo:** _hosted link added at deployment_ · Open a role directly: `/demo/tenant`, `/demo/linda`, `/demo/marco`
+**Live demo: https://mendly-hed3.onrender.com** · Open a role directly: [tenant](https://mendly-hed3.onrender.com/demo/tenant) · [Linda](https://mendly-hed3.onrender.com/demo/linda) · [Marco](https://mendly-hed3.onrender.com/demo/marco)
 
 License: [MIT](LICENSE)
 
