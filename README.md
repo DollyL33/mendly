@@ -8,19 +8,30 @@ Mendly is an AI repair agent for small landlords who manage their own rentals. A
 
 License: [MIT](LICENSE)
 
-## Try it (about 3 minutes)
+## How to try Mendly (about 3 minutes)
 
-1. Open the demo and click **Start the guided demo**. You get your own private copy of the data.
-2. **Tenant:** click **Use an example report**, then **Send report**. The agent writes a plan in a few seconds.
-3. **Linda (landlord):** follow the green **Next** bar. Set the amount at or under $100 and keep the "tap off" and "tap running" photos. Click the PayPal button and log in with the **sandbox login shown in the dark banner** (use its Copy buttons). The ticket now reads *"Held on your PayPal, not charged yet."*
-4. **Marco (handyman):** click **Set A: passes**, then **Send**. Each photo gets a Verified stamp with a reason, then *"Payment on its way"* turns into *"Paid"* with the seconds from proof to payment.
-5. Try the other paths:
-   - **Set C** includes a photo from an earlier job: the reuse check catches it.
-   - **Set B** includes a blurry photo: the agent says exactly what to retake. A second failure goes to Linda.
-   - The **$180 wall patch** is over the $100 limit, so Linda decides at the end: **Pay Marco** or **Cancel job** (the hold is released).
-6. **Reset demo** (top right) starts over. Each sample set can be used once per demo; reusing it on another job is caught as reuse, as it should be.
+Open **https://mendly-hed3.onrender.com** on a computer or phone. No sign-up: you get your own private copy of the demo, so other judges won't affect what you see. Everything uses the **PayPal sandbox**: no real money moves.
 
-The PayPal **sandbox** is used throughout: no real money moves. On a real job Marco uses the live camera; the sample photo sets exist because judges aren't at the rental.
+### The main story: a repair paid automatically
+
+1. Click **Start the guided demo**. You're the **tenant**.
+2. Click **Use an example report**, then **Send report**. In a few seconds the AI agent turns it into a job: a summary, a price estimate and a checklist of proof photos.
+3. Click **Continue as Linda →** in the green **Next** bar (Linda is the landlord). Click **Edit amount or checklist**, set the amount to **85** (under her $100 auto-pay limit), keep only **"tap off"** and **"tap running"** (the sample photos cover those two), and **Save plan**.
+4. Click the **PayPal** button. Log in with **Linda's sandbox login** from the dark banner at the top (use its **Copy** buttons) and approve. The ticket reads **"Held on your PayPal, not charged yet."**
+5. Click **Continue as Marco →** (the handyman). Click **Set A: passes**, then **Send 2 photos for checking**. Each photo gets a **Verified** stamp with the agent's reason.
+6. Watch the payment land: with no action from Linda, Marco's panel goes from **"Payment on its way"** to **"Paid $85.00"**, with the seconds from proof to payment.
+7. Switch to **Linda** for the full job record and *"Handled without you,"* or to the **tenant** for *"Fixed and verified."*
+
+### Try the safeguards
+
+- **Reused photo:** report another problem as the tenant and fund it as Linda. As Marco, pick **Set C**: one photo is from an earlier job, and Mendly's fingerprint check rejects it.
+- **Bad photo:** pick **Set B**. The agent marks the blurry photo as a **Problem** and says exactly what to retake. Failing twice sends the job to Linda.
+- **Over the limit:** the **$180 wall patch** on Linda's page is over her $100 limit, so even with every photo verified Mendly stops and asks her to **Pay Marco** or **Cancel job**. Cancelling releases the PayPal hold; she's never charged.
+
+### Good to know
+
+- **Reset demo** (top right) starts over. Each sample photo set works once per demo, because reusing photos on a second job is caught, as it should be.
+- On a phone, **Take photo** opens the live camera: that's how a real handyman sends proof. The sample sets exist because judges aren't at the rental.
 
 ## How it works
 
