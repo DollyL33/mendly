@@ -39,7 +39,7 @@ Build mode: learn
   Learner check: As Linda, approve the plan from slice 2 using the sandbox login. Read the money status, then switch to Marco and check the job shows the money is held.
   Commit: `Approve and hold funds through PayPal`
 
-- [ ] **4. Marco submits proof and the agent inspects each photo**
+- [x] **4. Marco submits proof and the agent inspects each photo**
   Becomes usable: On his phone-sized screen, Marco takes a photo per checklist item, or picks a sample set. Each item gets a Verified stamp or a Problem mark with one sentence of reasoning. A reused photo is caught. Failed items can be retaken.
   Why now: This is the heart of Mendly (the AI checking proof), so it comes before payment and polish.
   PRD ref: `prd.md > Proof submission`, `prd.md > AI inspection`, `prd.md > Fix and resend`, `prd.md > States and Boundaries` (inspection running, partly failed)
@@ -103,3 +103,10 @@ Activity mode:
 
 ## Revisions
 
+- Payouts confirmed in the sandbox; the payee fallback was not needed — `check-paypal.ts` paid Marco $85 (payout SUCCESS in ~20 seconds, passing through PENDING and PROCESSING first).
+- PayPal Server SDK has no Payouts, so `createPayout`/`getPayoutStatus` call REST directly — as the spec anticipated. Button uses PayPal JS SDK v6 (`@paypal/react-paypal-js/sdk-v6`), which needs only the client ID.
+- A reused photo counts as a failed item Marco must retake; it goes to Linda only on a second failure — the spec said reuse goes straight to Linda, but `scope.md > What "Working" Looks Like` describes Marco being caught, retaking a real photo, and being paid without Linda.
+- Seeded sample jobs moved from slice 6 into slice 4 — the reused-photo check needs an earlier job's proof photo to exist in every visitor's demo. The paid sample is a kitchen drain job (not a bathroom fan) so its proof photo is a sink shot.
+- Planner and inspector prompts tuned — real runs showed the planner stacking conditions into one photo ("handle off and sink dry, after waiting minutes") and asking for removed-part photos; the inspector now judges the main thing asked for, and still fails missing, blurry or wrong subjects.
+- Sample photos are the learner's own, re-encoded with brand labels blurred and all metadata (GPS) removed by `scripts/prepare-samples.mjs`; originals in `public/samples/raw/` are git-ignored.
+- `scripts/check-rules.ts` added (`npm run check:rules`) to verify the payment rules and fingerprint without AI or PayPal.

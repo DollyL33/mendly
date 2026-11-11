@@ -9,6 +9,8 @@ import { currentDemo } from "@/lib/demo";
 import { lindaStatus, money, timeOf } from "@/lib/format";
 import { getChecklist, getEvents, getJob } from "@/lib/jobs";
 import { photoUrl } from "@/lib/photos";
+import { proofPhotos } from "@/lib/proof";
+import { InspectionStamp } from "@/components/InspectionStamp";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +22,7 @@ export default async function LindaJobPage({ params }: PageProps<"/linda/jobs/[i
 
   const checklist = getChecklist(job.id);
   const events = getEvents(job.id);
+  const proof = proofPhotos(job.id);
   const s = lindaStatus[job.status];
   const planFailed = job.status === "reported" && events.at(-1)?.kind === "plan_failed";
   const overLimit = job.amount_cents != null && job.amount_cents > demo.auto_pay_limit_cents;
@@ -111,6 +114,39 @@ export default async function LindaJobPage({ params }: PageProps<"/linda/jobs/[i
               <p className="muted small">
                 Marco can start. You're charged only when every proof photo is verified, or when you choose to pay.
               </p>
+            </section>
+          )}
+
+          {job.status === "needs_linda" && (
+            <section className="ticket-section">
+              <p className="notice notice-attention">
+                <strong>Needs your decision:</strong> {job.needs_linda_reason}
+              </p>
+            </section>
+          )}
+
+          {proof.length > 0 && (
+            <section className="ticket-section">
+              <h2 className="section-label">Proof photos and the agent's checks</h2>
+              <ul className="proof-record">
+                {proof.map((p) => {
+                  const item = checklist.find((c) => c.id === p.item_id);
+                  return (
+                    <li key={p.id} className="result">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={photoUrl(p.path)} alt={`Proof for ${item?.label ?? "an item"}`} className="result-photo" />
+                      <div className="result-body">
+                        <p className="check-label">
+                          {item?.label ?? "Removed item"}
+                          {p.attempt > 1 && <span className="muted small"> · retake</span>}
+                        </p>
+                        <InspectionStamp verdict={p.verdict} />
+                        <p className="result-reason">{p.reason}</p>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
             </section>
           )}
 

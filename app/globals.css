@@ -219,3 +219,59 @@ h3.section-label { margin-top: 20px; }
 .marco-problem { display: grid; grid-template-columns: 96px 1fr; gap: 14px; align-items: start; }
 .marco-problem .report-photo { width: 96px; height: 96px; }
 .marco .check-label { font-size: 1.05rem; }
+
+/* ---------- Inspection stamp ---------- */
+
+.stamp {
+  display: inline-block; transform: rotate(-4deg); padding: 2px 10px; margin: 2px 0 6px;
+  border: 2.5px solid currentColor; border-radius: 6px;
+  font-family: var(--font-mono), ui-monospace, monospace; font-weight: 600; font-size: 0.82rem;
+  letter-spacing: 0.12em; text-transform: uppercase; background: rgba(255, 255, 255, 0.6);
+}
+.stamp-ok { color: var(--ok); }
+.stamp-problem { color: var(--problem); }
+.stamp-neutral { color: var(--muted); }
+
+/* ---------- Proof capture and results ---------- */
+
+.marco-label { margin: 22px 0 10px; }
+.samples { padding: 14px 16px; background: var(--brand-tint); border-color: #cfdcd7; }
+.samples-title { font-weight: 700; }
+.sample-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.sample-button {
+  font: inherit; font-weight: 600; font-size: 0.88rem; padding: 8px 12px; border-radius: 8px;
+  background: #fff; border: 1px solid #cfdcd7; color: var(--brand); cursor: pointer; min-height: 40px;
+}
+.sample-button:hover { border-color: var(--brand); }
+.proof-items { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 12px; }
+.proof-item { padding: 16px; margin-bottom: 0 !important; }
+.proof-item.done { opacity: 0.92; }
+.proof-item-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+.capture { display: grid; gap: 8px; }
+.capture-button { min-height: 56px; font-size: 1.05rem; }
+.capture-preview { position: relative; }
+.capture-preview img { width: 100%; max-height: 260px; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); }
+.sample-tag {
+  position: absolute; left: 8px; bottom: 8px; background: rgba(31, 42, 46, 0.82); color: #fff;
+  font-size: 0.75rem; font-weight: 600; padding: 3px 8px; border-radius: 6px;
+}
+.checking { color: var(--brand); font-weight: 600; margin-top: 8px; }
+.proof-submit { margin-top: 16px; position: sticky; bottom: 12px; }
+.proof-submit .button { box-shadow: 0 6px 18px rgba(31, 42, 46, 0.18); min-height: 56px; }
+
+.result { display: grid; grid-template-columns: 112px 1fr; gap: 14px; align-items: start; margin-bottom: 12px; }
+.result-old { opacity: 0.75; }
+.result-photo { width: 112px; height: 112px; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); }
+.result-reason { font-size: 0.95rem; }
+.result-fix { font-size: 0.95rem; color: var(--problem); margin-top: 4px; }
+.proof-record { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+
+/* ---------- Camera ---------- */
+
+.camera { position: fixed; inset: 0; background: rgba(15, 20, 22, 0.92); z-index: 50; display: grid; place-items: center; padding: 16px; }
+.camera-inner { width: 100%; max-width: 560px; display: grid; gap: 12px; }
+.camera-video { width: 100%; border-radius: 10px; background: #000; max-height: 70vh; object-fit: cover; }
+.camera-fallback { background: var(--card); border-radius: 10px; padding: 20px; display: grid; gap: 12px; }
+.camera-actions { display: grid; gap: 4px; }
+.shutter { min-height: 60px; font-size: 1.1rem; }
+.camera-cancel { color: #fff; justify-self: center; }

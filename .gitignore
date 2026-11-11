@@ -17,3 +17,6 @@ next-env.d.ts
 /data
 
 .DS_Store
+
+# Original sample photos (may contain GPS data); only cleaned copies are committed
+/public/samples/raw

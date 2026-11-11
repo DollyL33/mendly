@@ -3,7 +3,7 @@
 import { NextResponse } from "next/server";
 import { currentDemo } from "@/lib/demo";
 import { createJob } from "@/lib/jobs";
-import { MAX_UPLOAD_BYTES, savePhoto } from "@/lib/photos";
+import { MAX_UPLOAD_BYTES, recordReportPhoto, savePhoto } from "@/lib/photos";
 import { runPlanning } from "@/lib/planning";
 
 export const maxDuration = 120;
@@ -21,14 +21,15 @@ export async function POST(request: Request) {
   }
   if (photo.size > MAX_UPLOAD_BYTES) return NextResponse.json({ error: "That photo is too large (15 MB max)." }, { status: 400 });
 
-  let photoName: string;
+  let saved: { name: string; fingerprint: string };
   try {
-    photoName = await savePhoto(Buffer.from(await photo.arrayBuffer()));
+    saved = await savePhoto(Buffer.from(await photo.arrayBuffer()));
   } catch {
     return NextResponse.json({ error: "That file doesn't look like a photo. Try a JPG or PNG." }, { status: 400 });
   }
 
-  const job = createJob(demo.id, text, photoName);
+  const job = createJob(demo.id, text, saved.name);
+  recordReportPhoto(job.id, saved.name, saved.fingerprint);
   const outcome = await runPlanning(job);
   return NextResponse.json({ jobId: job.id, planned: outcome.ok, message: outcome.ok ? undefined : outcome.message });
 }

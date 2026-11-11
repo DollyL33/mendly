@@ -12,7 +12,8 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "check:paypal": "tsx --env-file=.env.local scripts/check-paypal.ts"
+    "check:paypal": "tsx --env-file=.env.local scripts/check-paypal.ts",
+    "check:rules": "tsx scripts/check-rules.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.8.0",

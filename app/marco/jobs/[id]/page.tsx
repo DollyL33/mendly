@@ -7,6 +7,8 @@ import { money } from "@/lib/format";
 import { getChecklist, getJob } from "@/lib/jobs";
 import { marcoStatus, MARCO_VISIBLE } from "@/lib/marco";
 import { photoUrl } from "@/lib/photos";
+import { latestPhotos } from "@/lib/proof";
+import { ProofCapture } from "@/components/ProofCapture";
 
 export const dynamic = "force-dynamic";
 
@@ -31,6 +33,7 @@ export default async function MarcoJobPage({ params }: PageProps<"/marco/jobs/[i
   }
 
   const checklist = getChecklist(job.id);
+  const latest = latestPhotos(job.id);
   const s = marcoStatus[job.status];
 
   return (
@@ -66,21 +69,35 @@ export default async function MarcoJobPage({ params }: PageProps<"/marco/jobs/[i
           </div>
         </section>
 
-        <section className="card marco-section">
-          <h2 className="section-label">Proof photos to take when you're done</h2>
-          <ol className="checklist">
-            {checklist.map((item, i) => (
-              <li key={item.id}>
-                <span className="check-num mono">{i + 1}</span>
-                <div>
-                  <p className="check-label">{item.label}</p>
-                  <p className="check-instruction">{item.photo_instruction}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-          <p className="muted small">Taking and sending proof photos arrives in the next step of the build.</p>
-        </section>
+        {job.status === "needs_fix" && (
+          <p className="notice notice-attention">
+            Some photos didn't pass. Retake only the items marked <strong>Problem</strong>; the verified ones are kept.
+          </p>
+        )}
+        {job.status === "needs_linda" && (
+          <p className="notice notice-attention">Linda is reviewing this job: {job.needs_linda_reason}</p>
+        )}
+        {job.status === "cancelled" && <p className="notice notice-problem">Linda cancelled this job. The hold was released.</p>}
+
+        <h2 className="section-label marco-label">
+          {job.status === "funded" ? "Proof photos to take when you're done" : "Proof photos"}
+        </h2>
+        <ProofCapture
+          jobId={job.id}
+          items={checklist.map((item) => {
+            const last = latest[item.id];
+            const canSubmit = job.status === "funded" || (job.status === "needs_fix" && last?.verdict !== "pass");
+            return {
+              id: item.id,
+              label: item.label,
+              instruction: item.photo_instruction,
+              required: canSubmit && !job.is_sample,
+              last: last
+                ? { url: photoUrl(last.path), verdict: last.verdict, reason: last.reason, fix: last.fix_instruction }
+                : undefined,
+            };
+          })}
+        />
       </main>
     </>
   );

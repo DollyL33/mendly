@@ -3,6 +3,7 @@
 
 import { cookies } from "next/headers";
 import { db, now } from "./db";
+import { seedDemo } from "./seed";
 
 export const DEMO_COOKIE = "mendly_demo";
 
@@ -13,8 +14,17 @@ export interface Demo {
   ai_calls_used: number;
 }
 
-export function ensureDemo(id: string): Demo {
-  db().prepare("INSERT OR IGNORE INTO demos (id, created_at) VALUES (?, ?)").run(id, now());
+const seeding = new Map<string, Promise<void>>();
+
+/** Creates the visitor's demo on first visit, with the starting jobs. */
+export async function ensureDemo(id: string): Promise<Demo> {
+  const created = db().prepare("INSERT OR IGNORE INTO demos (id, created_at) VALUES (?, ?)").run(id, now());
+  const hasSamples = db().prepare("SELECT 1 FROM jobs WHERE demo_id = ? AND is_sample = 1 LIMIT 1").get(id);
+  if (created.changes === 1 || !hasSamples) {
+    // One seed per demo, even if several requests arrive at once.
+    if (!seeding.has(id)) seeding.set(id, seedDemo(id).finally(() => seeding.delete(id)));
+    await seeding.get(id);
+  }
   return db().prepare("SELECT * FROM demos WHERE id = ?").get(id) as Demo;
 }
 
