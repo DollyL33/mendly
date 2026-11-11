@@ -30,7 +30,7 @@ Open **https://mendly-hed3.onrender.com** on a computer or phone. No sign-up: yo
 
 ### Good to know
 
-- **Reset demo** (top right) starts over. Each sample photo set works once per demo, because reusing photos on a second job is caught, as it should be.
+- **Reset demo** (top right) starts over. Sample sets A and B can be used on any number of jobs; Set C contains a photo from an earlier job and is always caught. Photos taken with the camera or uploaded are always checked against earlier jobs.
 - On a phone, **Take photo** opens the live camera: that's how a real handyman sends proof. The sample sets exist because judges aren't at the rental.
 
 ## How it works

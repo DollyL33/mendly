@@ -10,7 +10,7 @@ import { currentDemo, useAiCall } from "@/lib/demo";
 import { addEvent, getChecklist, getJob, setStatus } from "@/lib/jobs";
 import { findReuse, MAX_UPLOAD_BYTES, savePhoto, type ReuseMatch } from "@/lib/photos";
 import { decide } from "@/lib/rules";
-import { isSampleFile } from "@/lib/samples";
+import { isSampleFile, REUSED_PHOTO } from "@/lib/samples";
 import { latestPhotos } from "@/lib/proof";
 import { startPayment } from "@/lib/payment";
 
@@ -33,7 +33,7 @@ export async function POST(request: Request, ctx: RouteContext<"/api/jobs/[id]/p
 
   // Read the photos first, so a missing one doesn't leave the job half-changed.
   const form = await request.formData();
-  const inputs: { itemId: string; data: Buffer }[] = [];
+  const inputs: { itemId: string; data: Buffer; sample?: string }[] = [];
   for (const item of required) {
     const file = form.get(`photo:${item.id}`);
     const sample = form.get(`sample:${item.id}`);
@@ -41,7 +41,7 @@ export async function POST(request: Request, ctx: RouteContext<"/api/jobs/[id]/p
       if (file.size > MAX_UPLOAD_BYTES) return NextResponse.json({ error: "A photo is too large (15 MB max)." }, { status: 400 });
       inputs.push({ itemId: item.id, data: Buffer.from(await file.arrayBuffer()) });
     } else if (typeof sample === "string" && isSampleFile(sample)) {
-      inputs.push({ itemId: item.id, data: await fs.readFile(path.join(process.cwd(), "public", "samples", sample)) });
+      inputs.push({ itemId: item.id, data: await fs.readFile(path.join(process.cwd(), "public", "samples", sample)), sample });
     } else {
       return NextResponse.json({ error: `Add a photo for "${item.label}" before sending.` }, { status: 400 });
     }
@@ -60,7 +60,10 @@ export async function POST(request: Request, ctx: RouteContext<"/api/jobs/[id]/p
   try {
     for (const input of inputs) {
       const { name, fingerprint } = await savePhoto(input.data);
-      const reuse = findReuse(demo.id, job.id, fingerprint);
+      // Demo sample sets A and B are props a judge may use on any number of jobs. Set C's
+      // "earlier job" photo, and every camera shot or uploaded file, is always checked.
+      const isDemoProp = input.sample !== undefined && input.sample !== REUSED_PHOTO.file;
+      const reuse = isDemoProp ? null : findReuse(demo.id, job.id, fingerprint);
       const photoId = randomUUID();
       db()
         .prepare(

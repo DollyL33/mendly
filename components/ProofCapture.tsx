@@ -79,8 +79,8 @@ export function ProofCapture({ jobId, items }: { jobId: string; items: ProofItem
       <div className="card samples">
         <p className="samples-title">Demo mode: use sample proof photos</p>
         <p className="muted small">
-          Judges aren't at the rental. On a real job, Marco uses the live camera. Each set can be used once per demo:
-          sending the same photos to a second job is caught as reuse, as it should be. Reset the demo to start over.
+          Judges aren't at the rental. On a real job, Marco uses the live camera, and every photo is checked against
+          earlier jobs. Set C includes a photo from an earlier job, to show that check catching it.
         </p>
         <div className="sample-buttons">
           {(Object.keys(SAMPLE_SETS) as SampleSet[]).map((set) => (

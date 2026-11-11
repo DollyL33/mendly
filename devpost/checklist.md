@@ -87,6 +87,7 @@ Build mode: learn
 
 ## Final Review
 
+- [x] Linda no longer has to delete a third (under-sink) photo — planner asks for exactly 2 photos; learner retested on the live site and it worked.
 - [ ] Final review complete — feedback resolved and learner confirms ready to ship
 
 ## Code Tour and App Map
@@ -113,3 +114,4 @@ Activity mode:
 - Hosted at https://mendly-hed3.onrender.com (Render Starter, 1 GB disk at `/var/data`); a job and its photo survived two redeploys. The learner ran the full story on a phone with the live camera, ending in "Paid $85.00".
 - License is MIT (chosen by the agent to meet the open-source rule; offered Apache 2.0 as an alternative).
 - Planner now asks for exactly 2 proof photos (the repaired thing close up, then the fix working) — the learner found Linda had to delete a third, under-sink photo every run because no sample covered it; 2 photos is simpler for judges and real handymen. PRD and spec updated.
+- Sample sets A and B are treated as demo props and skip the reuse check; Set C's earlier-job photo and every camera shot or uploaded file are still checked — the learner hit false 'reused' errors re-running Set A, and judges trying Set B after the main story would have seen reuse instead of the blurry-photo lesson.
