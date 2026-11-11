@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ApproveAndFund } from "@/components/ApproveAndFund";
 import { PlanEditor } from "@/components/PlanEditor";
 import { RetryPlan } from "@/components/RetryPlan";
 import { StatusPill } from "@/components/StatusPill";
@@ -95,9 +96,21 @@ export default async function LindaJobPage({ params }: PageProps<"/linda/jobs/[i
             </section>
           )}
 
-          {job.status === "waiting_approval" && (
-            <section className="ticket-section approve-placeholder">
-              <p className="muted">Approving through PayPal arrives in the next step of the build.</p>
+          {job.status === "waiting_approval" && !job.is_sample && (
+            <section className="ticket-section">
+              <ApproveAndFund jobId={job.id} amountLabel={money(job.amount_cents)} />
+            </section>
+          )}
+
+          {job.authorization_id && job.status === "funded" && (
+            <section className="ticket-section money-status">
+              <h2 className="section-label">Where your money is</h2>
+              <p className="money-line">
+                <span className="money">{money(job.amount_cents)}</span> held on your PayPal, not charged yet.
+              </p>
+              <p className="muted small">
+                Marco can start. You're charged only when every proof photo is verified, or when you choose to pay.
+              </p>
             </section>
           )}
 

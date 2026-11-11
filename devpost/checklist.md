@@ -29,7 +29,7 @@ Build mode: learn
   Learner check: As the tenant, report a leaking tap with one of your photos. Switch to Linda and read the plan: does it make sense, and does the page feel like a calm job ticket?
   Commit: `Turn tenant reports into AI job plans`
 
-- [ ] **3. Linda approves through PayPal and the money is held**
+- [x] **3. Linda approves through PayPal and the money is held**
   Becomes usable: Linda clicks the real PayPal button on the ticket, logs in with the sandbox login, and the ticket reads "Held on your PayPal, not charged yet." Marco now sees the funded job. Decline closes it.
   Why now: Joins slice 1's proven money code to the real screens, so the approval half of the flow works before Marco's part depends on it.
   PRD ref: `prd.md > Approval and funding`, `prd.md > States and Boundaries` (waiting for approval, money held)
