@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { NextStepHint } from "@/components/NextStepHint";
+import { nextStep } from "@/lib/hints";
+
 import { LimitSetting } from "@/components/LimitSetting";
 import { StatusPill } from "@/components/StatusPill";
 import { TopBar } from "@/components/TopBar";
@@ -39,10 +42,13 @@ export default async function LindaPage() {
   const isNeeded = (j: Job) => NEEDS_YOU.has(j.status) || planFailed(j);
   const needsYou = jobs.filter(isNeeded);
   const others = jobs.filter((j) => !isNeeded(j));
+  const live = jobs.filter((j) => !j.is_sample);
+  const focus = live.find(isNeeded) ?? live[0];
 
   return (
     <>
       <TopBar role="linda" />
+      <NextStepHint hint={nextStep("linda", focus, demo.auto_pay_limit_cents)} />
       <main className="page">
         <p className="eyebrow">Linda · 14 Alder Street</p>
         <h1>Repairs</h1>

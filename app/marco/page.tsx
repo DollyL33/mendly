@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { NextStepHint } from "@/components/NextStepHint";
+import { nextStep } from "@/lib/hints";
+
 import { StatusPill } from "@/components/StatusPill";
 import { TopBar } from "@/components/TopBar";
 import { currentDemo } from "@/lib/demo";
@@ -15,6 +18,7 @@ export default async function MarcoPage() {
   return (
     <>
       <TopBar role="marco" />
+      <NextStepHint hint={nextStep("marco", jobs.find((j) => !j.is_sample), demo.auto_pay_limit_cents)} />
       <main className="page narrow marco">
         <p className="eyebrow">Marco · handyman</p>
         <h1>Your jobs</h1>

@@ -1,4 +1,8 @@
 import Link from "next/link";
+import { NextStepHint } from "@/components/NextStepHint";
+import { nextStep } from "@/lib/hints";
+import { Timeline } from "@/components/Timeline";
+
 import { notFound } from "next/navigation";
 import { ApproveAndFund } from "@/components/ApproveAndFund";
 import { DecisionPanel } from "@/components/DecisionPanel";
@@ -36,6 +40,7 @@ export default async function LindaJobPage({ params }: PageProps<"/linda/jobs/[i
   return (
     <>
       <TopBar role="linda" jobId={job.id} />
+      <NextStepHint hint={job.is_sample ? { text: "This is a sample job showing a past repair. The live jobs are the ones without the Sample label." } : nextStep("linda", job, demo.auto_pay_limit_cents)} />
       <main className="page">
         <Link href="/linda" className="back">
           ← All repairs
@@ -50,6 +55,7 @@ export default async function LindaJobPage({ params }: PageProps<"/linda/jobs/[i
               </p>
               <h1 className="ticket-title">{job.title}</h1>
               <StatusPill label={s.label} tone={s.tone} />
+              <Timeline status={job.status} events={events} />
             </div>
             <div className="ticket-amount">
               <p className="money big">{money(job.amount_cents)}</p>

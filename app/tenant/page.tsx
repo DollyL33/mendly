@@ -1,3 +1,5 @@
+import { NextStepHint } from "@/components/NextStepHint";
+import { nextStep } from "@/lib/hints";
 import { ReportForm } from "@/components/ReportForm";
 import { StatusPill } from "@/components/StatusPill";
 import { TopBar } from "@/components/TopBar";
@@ -14,6 +16,9 @@ export default async function TenantPage() {
   return (
     <>
       <TopBar role="tenant" />
+      <NextStepHint
+        hint={nextStep("tenant", reports.find((j) => j.created_at >= demo.created_at), demo.auto_pay_limit_cents)}
+      />
       <main className="page narrow">
         <p className="eyebrow">{PROPERTY_ADDRESS}</p>
         <h1>Report a problem</h1>

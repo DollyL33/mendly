@@ -59,7 +59,7 @@ Build mode: learn
   Learner check: Run the $85 tap repair from tenant report to "Paid $85" without touching Linda after approval. Then check Marco's sandbox balance.
   Commit: `Pay automatically by rule and route exceptions to Linda`
 
-- [ ] **6. A judge can find their way through a polished demo**
+- [x] **6. A judge can find their way through a polished demo**
   Becomes usable: A judge lands on the entry page, picks a role or starts the guided demo, and is led by next-step hints. They have their own private copy with seeded jobs ($180 wall patch, a paid sample, a reused-photo sample), can copy the sandbox login, Reset, and read each job's full timeline.
   Why now: The core works, so now it gets wrapped for judges, who arrive cold. Design is scored as a complete product.
   PRD ref: `prd.md > Screens and Layout`, `prd.md > Demo experience`, `prd.md > Job record`

@@ -17,6 +17,12 @@ export function ReportForm() {
 
   const ready = text.trim().length >= 5 && photo !== null;
 
+  async function useExample() {
+    setText("The kitchen tap keeps dripping even when it's turned off. It's been like this for two days.");
+    const blob = await fetch("/samples/seed-report.jpg").then((r) => r.blob());
+    choosePhoto(new File([blob], "example-report.jpg", { type: "image/jpeg" }));
+  }
+
   function choosePhoto(file: File | undefined) {
     setPhoto(file ?? null);
     if (preview) URL.revokeObjectURL(preview);
@@ -69,6 +75,12 @@ export function ReportForm() {
 
   return (
     <form className="card report-form" onSubmit={submit}>
+      <div className="example-row">
+        <span className="muted small">Trying the demo?</span>
+        <button type="button" className="button-quiet small" onClick={useExample} disabled={sending}>
+          Use an example report
+        </button>
+      </div>
       <label className="field">
         <span className="field-label">What's wrong?</span>
         <textarea

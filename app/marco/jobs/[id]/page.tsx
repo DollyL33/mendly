@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { NextStepHint } from "@/components/NextStepHint";
+import { nextStep } from "@/lib/hints";
+
 import { notFound } from "next/navigation";
 import { StatusPill } from "@/components/StatusPill";
 import { TopBar } from "@/components/TopBar";
@@ -40,6 +43,7 @@ export default async function MarcoJobPage({ params }: PageProps<"/marco/jobs/[i
   return (
     <>
       <TopBar role="marco" jobId={job.id} />
+      <NextStepHint hint={job.is_sample ? { text: "This is a sample job showing a past repair. The live jobs are the ones without the Sample label." } : nextStep("marco", job, demo.auto_pay_limit_cents)} />
       <main className="page narrow marco">
         <Link href="/marco" className="back">
           ← Your jobs
