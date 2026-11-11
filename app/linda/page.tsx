@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LimitSetting } from "@/components/LimitSetting";
 import { StatusPill } from "@/components/StatusPill";
 import { TopBar } from "@/components/TopBar";
 import { currentDemo } from "@/lib/demo";
@@ -45,10 +46,7 @@ export default async function LindaPage() {
       <main className="page">
         <p className="eyebrow">Linda · 14 Alder Street</p>
         <h1>Repairs</h1>
-        <p className="lede">
-          Auto-pay limit <span className="money">{money(demo.auto_pay_limit_cents)}</span>. Jobs at or under it pay
-          Marco automatically once every photo is verified.
-        </p>
+        <LimitSetting limitCents={demo.auto_pay_limit_cents} />
 
         <section className="section">
           <h2>Needs you</h2>

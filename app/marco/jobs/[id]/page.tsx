@@ -9,6 +9,7 @@ import { marcoStatus, MARCO_VISIBLE } from "@/lib/marco";
 import { photoUrl } from "@/lib/photos";
 import { latestPhotos } from "@/lib/proof";
 import { ProofCapture } from "@/components/ProofCapture";
+import { MarcoPayPalPanel } from "@/components/MarcoPayPalPanel";
 
 export const dynamic = "force-dynamic";
 
@@ -68,6 +69,18 @@ export default async function MarcoJobPage({ params }: PageProps<"/marco/jobs/[i
             <p>{job.summary}</p>
           </div>
         </section>
+
+        <MarcoPayPalPanel
+          jobId={job.id}
+          status={job.status}
+          amountLabel={money(job.amount_cents)}
+          payoutStatus={job.payout_status}
+          seconds={
+            job.paid_at && job.proof_submitted_at
+              ? Math.max(1, Math.round((Date.parse(job.paid_at) - Date.parse(job.proof_submitted_at)) / 1000))
+              : null
+          }
+        />
 
         {job.status === "needs_fix" && (
           <p className="notice notice-attention">

@@ -49,7 +49,7 @@ Build mode: learn
   Learner check: As Marco, try the problem set and read what you're told to fix, retake it, then try the live camera on one item.
   Commit: `Inspect proof photos and catch reused ones`
 
-- [ ] **5. The rules pay Marco, or hand the job to Linda**
+- [x] **5. The rules pay Marco, or hand the job to Linda**
   Becomes usable: The whole repair runs end to end. An $85 job that passes pays Marco automatically: his panel shows "Payment on its way", then "Paid $85" and the time from proof to paid. The $180 job, a second failure, or a reused photo lands in Linda's Needs you section, where she pays Marco or cancels and the hold is released.
   Why now: Completes the core journey with real money movement. After this, the success test in `prd.md > The Core Journey` can be run for real.
   PRD ref: `prd.md > Automatic payment`, `prd.md > Linda's decisions`, `prd.md > The Core Journey` (steps 9-10)
@@ -82,7 +82,7 @@ Build mode: learn
 ## Hands-on Checkpoints
 
 - [x] Early usable behavior explored — after slice 2 (first screens and the AI plan, while look and feel can still change cheaply)
-- [ ] Full core journey explored — after slice 5 (the whole repair running for real)
+- [x] Full core journey explored — after slice 5 (the whole repair running for real)
 - [ ] Final kick-the-tires exploration and feedback completed
 
 ## Final Review

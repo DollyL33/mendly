@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ApproveAndFund } from "@/components/ApproveAndFund";
+import { DecisionPanel } from "@/components/DecisionPanel";
 import { PlanEditor } from "@/components/PlanEditor";
 import { RetryPlan } from "@/components/RetryPlan";
 import { StatusPill } from "@/components/StatusPill";
@@ -24,6 +25,11 @@ export default async function LindaJobPage({ params }: PageProps<"/linda/jobs/[i
   const events = getEvents(job.id);
   const proof = proofPhotos(job.id);
   const s = lindaStatus[job.status];
+  const handledByLinda = events.some((e) => e.kind === "linda_paid");
+  const secondsToPaid =
+    job.paid_at && job.proof_submitted_at
+      ? Math.max(1, Math.round((Date.parse(job.paid_at) - Date.parse(job.proof_submitted_at)) / 1000))
+      : null;
   const planFailed = job.status === "reported" && events.at(-1)?.kind === "plan_failed";
   const overLimit = job.amount_cents != null && job.amount_cents > demo.auto_pay_limit_cents;
 
@@ -118,10 +124,41 @@ export default async function LindaJobPage({ params }: PageProps<"/linda/jobs/[i
           )}
 
           {job.status === "needs_linda" && (
-            <section className="ticket-section">
-              <p className="notice notice-attention">
-                <strong>Needs your decision:</strong> {job.needs_linda_reason}
-              </p>
+            <section className="ticket-section needs-you">
+              {job.is_sample ? (
+                <p className="notice notice-attention">
+                  <strong>Needs your decision:</strong> {job.needs_linda_reason} <em>(Sample job: read-only.)</em>
+                </p>
+              ) : (
+                <DecisionPanel jobId={job.id} reason={job.needs_linda_reason ?? ""} amountLabel={money(job.amount_cents)} />
+              )}
+            </section>
+          )}
+
+          {(job.status === "paying" || job.status === "paid" || job.status === "cancelled") && (
+            <section className={`ticket-section money-status money-${job.status}`}>
+              <h2 className="section-label">Where your money is</h2>
+              {job.status === "paying" && (
+                <p className="money-line">
+                  <span className="money">{money(job.amount_cents)}</span> taken from the hold. Payment on its way to Marco.
+                </p>
+              )}
+              {job.status === "paid" && (
+                <p className="money-line">
+                  Paid to Marco, <span className="money">{money(job.amount_cents)}</span>
+                  {secondsToPaid ? `, ${secondsToPaid} seconds after proof` : ""}.
+                </p>
+              )}
+              {job.status === "cancelled" && (
+                <p className="money-line">Hold released. You weren't charged.</p>
+              )}
+              {(job.status === "paying" || job.status === "paid") && (
+                <p className="muted small">
+                  {handledByLinda
+                    ? "You approved this payment."
+                    : "Handled without you: every photo was verified and the job was within your auto-pay limit."}
+                </p>
+              )}
             </section>
           )}
 

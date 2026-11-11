@@ -275,3 +275,35 @@ h3.section-label { margin-top: 20px; }
 .camera-actions { display: grid; gap: 4px; }
 .shutter { min-height: 60px; font-size: 1.1rem; }
 .camera-cancel { color: #fff; justify-self: center; }
+
+/* ---------- Money moving: Marco's panel, Linda's decision, limit ---------- */
+
+.paypal-panel { padding: 18px; margin-bottom: 12px; border-left: 4px solid var(--brand); }
+.paypal-panel.paid { border-left-color: var(--ok); background: var(--ok-tint); }
+.paypal-panel-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 700; }
+.paypal-panel-amount { font-size: 2rem; line-height: 1.2; margin: 2px 0; }
+.paypal-panel.paid .paypal-panel-amount { color: var(--ok); }
+.paypal-panel-note { font-weight: 600; }
+.pulse {
+  display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--brand);
+  margin-right: 6px; animation: pulse 1.2s ease-in-out infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+@media (prefers-reduced-motion: reduce) { .pulse { animation: none; } }
+
+.needs-you { background: var(--attention-tint); }
+.decision { display: grid; gap: 10px; }
+.decision-title { font-weight: 800; color: #8a5a00; font-size: 1.05rem; }
+.decision-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.button-secondary { background: #fff; color: var(--ink); border: 1px solid #cfc7b9; }
+.button-secondary:hover:not(:disabled) { background: var(--paper); }
+.money-paid { background: var(--ok-tint); }
+.money-cancelled { background: #efebe4; }
+
+.limit { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 14px 18px; flex-wrap: wrap; margin-bottom: 4px; }
+.limit-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 700; }
+.limit-value { font-size: 1.6rem; }
+.limit-edit { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+.limit-edit input { width: 110px; font-size: 1.1rem; }
+.limit-edit .button { min-height: 40px; padding: 0 14px; }
+.limit-copy { max-width: 440px; }
