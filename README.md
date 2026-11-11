@@ -77,6 +77,7 @@ Payment rules (plain code, no AI)                                    [lib/rules.
   - **Planner:** reads the tenant's photo and words; returns a summary, a cost estimate, 2 proof-photo instructions (the repaired thing, then the fix working), and what it couldn't tell from the photo.
   - **Inspector:** reads every proof photo against its checklist item; returns pass or fail, a one-sentence reason, and a fix instruction.
 - **Claude Code (Claude Opus 5.5) to build it.** The app was planned and written with Claude Code, from a written scope, product requirements and technical spec (in `devpost/`). PayPal SDK calls were checked against the SDK's own type definitions.
+- **PayPal AI Toolkit (Claude Code plugin) to review it.** `/paypal:doctor` scanned the integration and reported no critical issues; its three warnings (declined payment methods, an idempotency key on order creation, a configurable PayPal environment) were fixed.
 - **Not AI, on purpose:** reused-photo detection (a 64-bit difference hash in `lib/photos.ts`) and the payment rules (`lib/rules.ts`). `npm run check:rules` tests both without AI or PayPal.
 
 ## Run it yourself
