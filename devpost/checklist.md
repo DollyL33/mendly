@@ -69,7 +69,7 @@ Build mode: learn
   Learner check: Open the app in a private window as if you were a judge and follow only the hints. Note anything confusing.
   Commit: `Add guided demo, seeded jobs and job timeline`
 
-- [ ] **7. Mendly is live for judges**
+- [x] **7. Mendly is live for judges**
   Becomes usable: The app runs at a public Render link with its data disk, and the GitHub repo has a README, an open source license, and setup instructions.
   Why now: Judges need a hosted link, and deploying early (before the deadline day) leaves time to fix surprises.
   PRD ref: `prd.md > What We're Building` (hosted demo, public repo)
@@ -110,3 +110,5 @@ Activity mode:
 - Planner and inspector prompts tuned — real runs showed the planner stacking conditions into one photo ("handle off and sink dry, after waiting minutes") and asking for removed-part photos; the inspector now judges the main thing asked for, and still fails missing, blurry or wrong subjects.
 - Sample photos are the learner's own, re-encoded with brand labels blurred and all metadata (GPS) removed by `scripts/prepare-samples.mjs`; originals in `public/samples/raw/` are git-ignored.
 - `scripts/check-rules.ts` added (`npm run check:rules`) to verify the payment rules and fingerprint without AI or PayPal.
+- Hosted at https://mendly-hed3.onrender.com (Render Starter, 1 GB disk at `/var/data`); a job and its photo survived two redeploys. The learner ran the full story on a phone with the live camera, ending in "Paid $85.00".
+- License is MIT (chosen by the agent to meet the open-source rule; offered Apache 2.0 as an alternative).
